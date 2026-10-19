@@ -1,0 +1,120 @@
+/* ============================================================
+   FOREST — お知らせ（一覧・詳細）
+   style.css / company.css を共用。差分のみ。
+   ============================================================ */
+
+/* ---------- 絞り込みタブ ---------- */
+.nw-tabs { margin-top: var(--s-32); display: flex; flex-wrap: wrap; gap: var(--s-8); }
+.nw-tab {
+  font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em;
+  display: inline-flex; align-items: center; gap: var(--s-8);
+  padding: var(--s-8) var(--s-20); border-radius: var(--r-pill);
+  background: var(--canvas); color: var(--text); border: 0; cursor: pointer;
+  transition: background .3s, color .3s;
+}
+.nw-tab span {
+  font-size: 11px; font-weight: 700; min-width: 22px; padding: 1px 7px; border-radius: var(--r-pill);
+  background: var(--surface); color: var(--text-muted); text-align: center;
+}
+.nw-tab:hover { background: var(--surface-2); }
+.nw-tab.is-active { background: var(--action); color: var(--text-onaccent); }
+.nw-tab.is-active span { background: rgba(255,255,255,.22); color: var(--text-onaccent); }
+
+/* ---------- カード一覧 ---------- */
+.nw-list-sec { background: var(--canvas); padding-top: clamp(var(--s-40), 5vw, var(--s-72)); }
+.nw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-24) var(--s-20); }
+.nw-card[hidden] { display: none; }
+.nw-card a { display: flex; flex-direction: column; height: 100%; }
+.nw-thumb {
+  border-radius: var(--r-card); overflow: hidden; aspect-ratio: 16/10;
+  background: var(--surface);
+}
+.nw-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--ease); }
+.nw-card a:hover .nw-thumb img { transform: scale(1.05); }
+.nw-thumb.is-banner img { object-fit: contain; background: #fff; }
+.nw-thumb.is-blank { display: grid; place-items: center; }
+.nw-thumb.is-blank img { width: 46%; height: auto; object-fit: contain; opacity: .3; }
+.nw-card-body { padding: var(--s-16) var(--s-4) 0; }
+.nw-meta { display: flex; align-items: center; gap: var(--s-12); font-size: 12px; color: var(--text-muted); }
+.nw-meta time { font-family: var(--font-mark); font-weight: 600; letter-spacing: .04em; }
+.nw-cat {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  padding: 2px 10px; border-radius: var(--r-pill); background: var(--surface); color: var(--text-muted);
+}
+.nw-card[data-cat="お知らせ"] .nw-cat, .nw-article-head .nw-cat { background: rgba(64,167,58,.12); color: var(--action-deep); }
+.nw-card h2 {
+  margin-top: var(--s-8);
+  font-family: var(--font-min); font-size: 16px; font-weight: 700; line-height: 1.6;
+  color: var(--text); letter-spacing: 0;
+  transition: color .3s;
+}
+.nw-card a:hover h2 { color: var(--action-deep); }
+.nw-excerpt { margin-top: var(--s-8); font-size: 13px; line-height: 1.8; color: var(--text-muted); }
+.nw-empty { padding: var(--s-40) 0; text-align: center; color: var(--text-muted); }
+
+/* ---------- 記事詳細 ---------- */
+.nw-narrow { width: min(820px, 92vw); }
+.nw-article-head {
+  padding: calc(var(--header-h) + clamp(var(--s-40), 6vw, var(--s-72))) 0 clamp(var(--s-32), 4vw, var(--s-40));
+  background: var(--surface); border-bottom: 1px solid var(--hairline);
+}
+.nw-article-head .nw-meta { margin-top: var(--s-24); }
+.nw-title {
+  margin-top: var(--s-12);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(22px, 3.2vw, 34px); line-height: 1.55; letter-spacing: -.01em; color: var(--text);
+}
+.nw-article { background: var(--canvas); padding-top: clamp(var(--s-40), 5vw, var(--s-56)); }
+.nw-body p { font-size: 15.5px; line-height: 2.05; color: var(--text); margin-bottom: var(--s-20); }
+.nw-body h2 {
+  margin: var(--s-32) 0 var(--s-12);
+  font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text);
+  padding-left: var(--s-12); border-left: 3px solid var(--action);
+}
+.nw-body a { color: var(--action-deep); border-bottom: 1px solid currentColor; word-break: break-all; }
+
+.nw-gallery { margin-top: var(--s-32); display: grid; gap: var(--s-12); }
+.nw-gallery--1 { grid-template-columns: minmax(0, 480px); }
+.nw-gallery--2 { grid-template-columns: repeat(2, 1fr); }
+.nw-gallery--3 { grid-template-columns: repeat(3, 1fr); }
+.nw-gallery--4 { grid-template-columns: repeat(2, 1fr); }
+.nw-gallery figure { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.nw-gallery img { width: 100%; height: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.nw-gallery--1 img { aspect-ratio: auto; object-fit: contain; }
+/* ロゴなど、切り抜きたくない画像 */
+.nw-gallery figure.is-contain { background: #fff; }
+.nw-gallery figure.is-contain img { object-fit: contain; }
+.nw-videos { margin-top: var(--s-32); display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-12); }
+.nw-videos video { width: 100%; border-radius: var(--r-card); background: #000; }
+
+.nw-pager {
+  margin-top: clamp(var(--s-40), 6vw, var(--s-72));
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-12);
+  padding-top: var(--s-32); border-top: 1px solid var(--hairline);
+}
+.nw-pager-item {
+  display: block; padding: var(--s-16) var(--s-20); border-radius: var(--r-card);
+  background: var(--surface); transition: background .3s;
+}
+.nw-pager-item:hover { background: var(--surface-2); }
+.nw-pager-item.is-next { text-align: right; }
+.nw-pager-item.is-empty { background: transparent; }
+.nw-pager-item span { display: block; font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--action-deep); }
+.nw-pager-item strong {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin-top: var(--s-4); font-size: 13.5px; font-weight: 600; line-height: 1.6; color: var(--text);
+}
+.nw-back { margin-top: var(--s-32); text-align: center; }
+
+@media (max-width: 900px) {
+  .nw-grid { grid-template-columns: repeat(2, 1fr); }
+  .nw-gallery--3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .nw-grid { grid-template-columns: 1fr; }
+  /* 写真は横に並べず、1枚ずつ大きく */
+  .nw-gallery--2, .nw-gallery--3, .nw-gallery--4 { grid-template-columns: 1fr; }
+  .nw-pager { grid-template-columns: 1fr; }
+  .nw-pager-item.is-next { text-align: left; }
+  .nw-videos { grid-template-columns: 1fr; }
+}

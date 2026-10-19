@@ -1,0 +1,280 @@
+/* ============================================================
+   FOREST — 採用ページ
+   style.css のトークンをそのまま使う。ここは差分だけ。
+   ============================================================ */
+
+.rc-h2 {
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 38px); line-height: 1.5; letter-spacing: -.01em;
+  color: var(--text);
+}
+.s-head--center { text-align: center; }
+.s-head--center .s-eyebrow { justify-content: center; }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.rc-hero {
+  position: relative; min-height: 88svh;
+  display: flex; align-items: center;
+  overflow: hidden; background: var(--canvas);
+}
+.rc-hero-media { position: absolute; inset: 0; z-index: 0; }
+.rc-hero-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 36%;
+  display: block;
+  animation: rcZoom 18s ease-out forwards;
+}
+@keyframes rcZoom { from { transform: scale(1.06); } to { transform: scale(1); } }
+.rc-hero-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 26%, rgba(255,255,255,.62) 50%, rgba(255,255,255,.26) 78%, rgba(255,255,255,.08) 100%),
+    linear-gradient(to top, var(--canvas) 2%, rgba(255,255,255,0) 26%);
+}
+.rc-hero-inner {
+  position: relative; z-index: 2;
+  width: min(var(--page), 92vw); margin-inline: auto;
+  padding-top: var(--header-h);
+}
+.rc-hero-title {
+  margin-top: var(--s-24);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(38px, 6.4vw, 80px); line-height: 1.3; letter-spacing: -.02em;
+  color: var(--text);
+}
+.rc-hero-lead { margin-top: var(--s-24); color: var(--text-muted); font-size: 16px; line-height: 1.85; }
+.rc-hero .hero-ctas { margin-top: var(--s-40); }
+
+/* ============================================================
+   数字
+   ============================================================ */
+.rc-facts { background: var(--text); padding: clamp(var(--s-40), 5vw, var(--s-56)) 0; }
+.rc-facts-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.rc-facts-grid li { padding: var(--s-12) var(--s-20); border-left: 1px solid rgba(255,255,255,.14); }
+.rc-facts-grid li:first-child { border-left: none; }
+.rc-fact-num {
+  display: block;
+  font-family: var(--font-mark); font-weight: 700;
+  font-size: clamp(34px, 4vw, 54px); line-height: 1;
+  color: var(--canvas); letter-spacing: -.03em;
+}
+.rc-fact-num i {
+  font-style: normal; font-family: var(--font-min);
+  font-size: .32em; color: var(--action); margin-left: var(--s-4); letter-spacing: 0;
+}
+.rc-facts-grid p { margin-top: var(--s-12); font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.6; }
+.rc-facts-grid small {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: .26em; color: rgba(255,255,255,.4); margin-top: var(--s-4);
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.rc-about { background: var(--canvas); }
+.rc-about-grid {
+  display: grid; grid-template-columns: 1.05fr .95fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: center;
+}
+.rc-about-text .rc-h2 { margin: var(--s-16) 0 var(--s-24); }
+.rc-about-text p { color: var(--text-muted); font-size: 15px; margin-bottom: var(--s-16); }
+.rc-about-text strong { color: var(--text); font-weight: 600; }
+.rc-about-fig { border-radius: var(--r-card); overflow: hidden; }
+.rc-about-fig img { width: 100%; height: auto; display: block; aspect-ratio: 16/10; object-fit: cover; }
+
+/* ============================================================
+   求める人物像
+   ============================================================ */
+.rc-want { background: var(--surface); }
+.rc-want-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-16); }
+.rc-want-card {
+  background: var(--canvas); border-radius: var(--r-card);
+  padding: var(--s-32); position: relative;
+  transition: transform .4s var(--ease);
+}
+.rc-want-num {
+  font-family: var(--font-mark); font-weight: 700; font-size: 13px;
+  letter-spacing: .12em; color: var(--action);
+}
+.rc-want-card h3 {
+  margin-top: var(--s-12);
+  font-family: var(--font-min); font-size: 18px; font-weight: 600;
+  letter-spacing: 0; color: var(--text); line-height: 1.6;
+}
+.rc-want-card p { margin-top: var(--s-12); font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+
+/* ============================================================
+   VOICE
+   ============================================================ */
+.rc-voice { background: var(--canvas); }
+.rc-voice-list { display: grid; gap: clamp(var(--s-32), 5vw, var(--s-56)); }
+.rc-voice-item {
+  display: grid; grid-template-columns: 300px 1fr;
+  gap: clamp(var(--s-24), 4vw, var(--s-56)); align-items: center;
+}
+.rc-voice-item--rev { grid-template-columns: 1fr 300px; }
+.rc-voice-item--rev .rc-voice-photo { order: 2; }
+.rc-voice-item--rev .rc-voice-body { order: 1; }
+
+.rc-voice-photo {
+  border-radius: var(--r-card); overflow: hidden;
+  background: var(--surface);
+}
+.rc-voice-photo img {
+  width: 100%; height: auto; display: block; aspect-ratio: 1;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform .8s var(--ease);
+}
+.rc-voice-item:hover .rc-voice-photo img { transform: scale(1.05); }
+
+.rc-voice-dept {
+  font-size: 11px; font-weight: 600; letter-spacing: .24em;
+  color: var(--action); text-transform: uppercase;
+}
+.rc-voice-name {
+  margin-top: var(--s-8);
+  font-family: var(--font-min); font-size: clamp(22px, 2.4vw, 30px); font-weight: 700;
+  color: var(--text); letter-spacing: -.01em;
+  display: flex; align-items: baseline; gap: var(--s-8); flex-wrap: wrap;
+}
+.rc-voice-name span { font-size: .6em; font-weight: 500; color: var(--text-muted); }
+.rc-voice-name em {
+  font-size: 12px; font-weight: 500; letter-spacing: .08em;
+  color: var(--text-muted);
+  padding: var(--s-4) var(--s-12); border-radius: var(--r-pill);
+  background: var(--surface);
+}
+.rc-voice-body blockquote {
+  margin-top: var(--s-16); position: relative;
+  font-size: 15px; line-height: 2; color: var(--text-muted);
+  padding-left: var(--s-24);
+  border-left: 2px solid var(--action);
+}
+
+/* ============================================================
+   魅力
+   ============================================================ */
+.rc-charm { background: var(--surface); }
+.rc-charm-list { display: grid; gap: var(--s-8); }
+.rc-charm-list li {
+  display: flex; gap: var(--s-24); align-items: flex-start;
+  background: var(--canvas); border-radius: var(--r-card);
+  padding: var(--s-24) var(--s-32);
+}
+.rc-charm-ico {
+  width: 46px; height: 46px; flex: none; border-radius: var(--r-card);
+  display: grid; place-items: center;
+  background: rgba(64, 167, 58, .1); color: var(--action);
+}
+.rc-charm-ico svg { width: 22px; height: 22px; }
+.rc-charm-list h3 {
+  font-family: var(--font-min); font-size: 17px; font-weight: 600;
+  color: var(--text); letter-spacing: 0;
+}
+.rc-charm-list p { margin-top: var(--s-4); font-size: 14px; color: var(--text-muted); }
+
+/* ============================================================
+   募集要項
+   ============================================================ */
+.rc-entry { background: var(--canvas); }
+.rc-table { display: grid; border-top: 1px solid var(--hairline); }
+.rc-table > div {
+  display: grid; grid-template-columns: 220px 1fr;
+  gap: var(--s-24);
+  padding: var(--s-24) var(--s-8);
+  border-bottom: 1px solid var(--hairline);
+}
+.rc-table dt { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: .04em; }
+.rc-table dd { font-size: 15px; color: var(--text-muted); line-height: 1.9; }
+.rc-note { display: inline-block; margin-top: var(--s-4); font-size: 13px; color: var(--text-muted); opacity: .85; }
+
+/* ============================================================
+   エントリー
+   ============================================================ */
+.rc-cta {
+  background: var(--text); color: var(--canvas); text-align: center;
+  padding: clamp(var(--s-72), 10vw, var(--s-112)) 0;
+  position: relative; overflow: hidden;
+}
+.rc-cta .s-eyebrow { color: rgba(255,255,255,.6); justify-content: center; }
+.rc-cta .s-eyebrow .dot { background: var(--action); }
+.rc-cta-inner { display: flex; flex-direction: column; align-items: center; }
+.rc-cta-title {
+  margin-top: var(--s-20);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(30px, 5vw, 58px); letter-spacing: -.01em; line-height: 1.45;
+  color: var(--canvas);
+}
+.rc-cta-lead { margin-top: var(--s-20); color: rgba(255,255,255,.7); font-size: 15px; }
+.rc-cta-actions {
+  margin-top: var(--s-40); display: flex; gap: var(--s-12); flex-wrap: wrap; justify-content: center;
+}
+.rc-cta-actions .btn svg { width: 18px; height: 18px; }
+.rc-cta-actions .btn:hover svg { transform: none; }
+.rc-cta-note { margin-top: var(--s-24); font-size: 12px; color: rgba(255,255,255,.45); letter-spacing: .06em; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .rc-hero { min-height: 78svh; }
+  .rc-hero-media img { object-position: 54% 34%; }
+  .rc-facts-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-16) 0; }
+  .rc-facts-grid li:nth-child(3) { border-left: none; }
+  .rc-about-grid { grid-template-columns: 1fr; }
+  .rc-about-fig { order: -1; }
+  .rc-want-grid { grid-template-columns: 1fr; }
+  .rc-voice-item, .rc-voice-item--rev { grid-template-columns: 1fr; gap: var(--s-20); }
+  .rc-voice-item--rev .rc-voice-photo { order: 0; }
+  .rc-voice-item--rev .rc-voice-body { order: 0; }
+  .rc-voice-photo { max-width: 260px; }
+  .rc-table > div { grid-template-columns: 1fr; gap: var(--s-4); }
+  .rc-charm-list li { padding: var(--s-20); gap: var(--s-16); }
+}
+
+@media (max-width: 520px) {
+  .rc-facts-grid li { padding: var(--s-8) var(--s-12); }
+  .rc-want-card { padding: var(--s-24); }
+  .rc-cta-actions { flex-direction: column; width: 100%; }
+  .rc-cta-actions .btn { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-hero-media img { animation: none; }
+}
+
+/* ---------- 働く環境へのリンク ---------- */
+.rc-work { background: var(--canvas); padding-bottom: 0; }
+.rc-work-card {
+  display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+  background: var(--surface); border-radius: var(--r-card); overflow: hidden;
+  transition: background .3s;
+}
+.rc-work-card:hover { background: var(--surface-2); }
+.rc-work-card figure { overflow: hidden; background: var(--surface-2); }
+.rc-work-card img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.rc-work-card:hover img { transform: scale(1.05); }
+.rc-work-body { padding: clamp(var(--s-24), 4vw, var(--s-40)); display: flex; flex-direction: column; justify-content: center; }
+.rc-work-body .rc-h2 { margin-top: var(--s-12); }
+.rc-work-body > p:not(.s-eyebrow) { margin-top: var(--s-8); font-size: 15px; color: var(--text-muted); }
+.rc-work-facts { margin-top: var(--s-20); display: flex; flex-wrap: wrap; gap: var(--s-8) var(--s-24); }
+.rc-work-facts li { font-size: 13px; font-weight: 600; color: var(--text); }
+.rc-work-facts strong { font-family: var(--font-mark); font-size: 30px; font-weight: 700; color: var(--accent); letter-spacing: -.02em; margin-right: 2px; }
+.rc-work-facts small { display: block; font-size: 11.5px; font-weight: 500; color: var(--text-muted); }
+.rc-work-more {
+  margin-top: var(--s-24); align-self: flex-start;
+  display: inline-flex; align-items: center; gap: var(--s-8);
+  font-size: 14px; font-weight: 600; color: var(--text-onaccent);
+  padding: var(--s-12) var(--s-24); border-radius: var(--r-pill); background: var(--action);
+  transition: background .3s;
+}
+.rc-work-more svg { width: 16px; height: 16px; transition: transform .35s var(--ease); }
+.rc-work-card:hover .rc-work-more { background: var(--action-deep); }
+.rc-work-card:hover .rc-work-more svg { transform: translateX(4px); }
+.rc-inline-link { display: inline-block; margin-top: var(--s-8); font-size: 14px; font-weight: 600; color: var(--action-deep); border-bottom: 1px solid currentColor; }
+@media (max-width: 900px) {
+  .rc-work-card { grid-template-columns: 1fr; }
+  .rc-work-card img { min-height: 0; aspect-ratio: 16/10; height: auto; }
+}

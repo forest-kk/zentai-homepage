@@ -1,0 +1,179 @@
+/* ============================================================
+   FOREST — 事業部ページ共通（タイヤ・運送・織布・太陽光・不動産・ホテル）
+   style.css / company.css / wood.css の後に読む。
+   写真の解像度が控えめな事業部向けに、全面ヒーローではなく
+   「文字＋写真カード」の分割ヒーローを基本にする。
+   ============================================================ */
+
+/* 番号付きリストはデザイン側で番号を出すので、ブラウザの番号は消す */
+main ol { list-style: none; }
+
+/* ---------- 分割ヒーロー ---------- */
+.dv-hero {
+  padding: calc(var(--header-h) + clamp(var(--s-40), 6vw, var(--s-72))) 0 clamp(var(--s-56), 7vw, var(--s-112));
+  background: var(--canvas);
+}
+.dv-hero-grid {
+  display: grid; grid-template-columns: 1fr 1.05fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: center;
+}
+.dv-hero .s-eyebrow { margin-top: var(--s-16); }
+.dv-title {
+  margin-top: var(--s-20);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(32px, 4.6vw, 58px); line-height: 1.35; letter-spacing: -.02em;
+  color: var(--text);
+}
+.dv-title .ht-line { display: block; }
+.dv-lead { margin-top: var(--s-24); font-size: 16px; line-height: 1.95; color: var(--text-muted); }
+.dv-name {
+  margin-top: var(--s-32); padding-top: var(--s-16); border-top: 1px solid var(--hairline);
+  font-size: 13px; letter-spacing: .08em; color: var(--text-muted);
+}
+.dv-name strong { color: var(--text); font-weight: 600; margin-right: var(--s-12); }
+.dv-hero-fig { position: relative; border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.dv-hero-fig img {
+  width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block;
+  animation: dvZoom 16s ease-out forwards;
+}
+@keyframes dvZoom { from { transform: scale(1.06); } to { transform: scale(1); } }
+.dv-hero-fig figcaption {
+  position: absolute; left: var(--s-12); bottom: var(--s-12);
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  padding: 4px 12px; border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, .9); color: var(--text);
+}
+
+/* ---------- 数字 ---------- */
+.dv-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+.dv-stats--3 { grid-template-columns: repeat(3, 1fr); }
+.dv-stats li { padding: var(--s-32) var(--s-20) var(--s-24); border-right: 1px solid var(--hairline); }
+.dv-stats li:last-child { border-right: 0; }
+.dv-stat-num {
+  display: block; font-family: var(--font-mark); font-weight: 700;
+  font-size: clamp(32px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.03em; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.dv-stat-num i { font-style: normal; font-size: 15px; font-weight: 600; letter-spacing: 0; margin-left: 4px; color: var(--text); }
+.dv-stats p { margin-top: var(--s-12); font-size: 14px; color: var(--text); line-height: 1.6; }
+.dv-stats small { display: block; font-size: 12px; color: var(--text-muted); letter-spacing: .04em; }
+
+/* ---------- 特長カード ---------- */
+.dv-sec { background: var(--canvas); }
+.dv-sec--alt { background: var(--surface); }
+.dv-sec-lead { margin-top: calc(var(--s-40) * -1); margin-bottom: var(--s-40); font-size: 15px; line-height: 2; color: var(--text-muted); max-width: 46em; }
+.dv-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-16); }
+.dv-features--2 { grid-template-columns: repeat(2, 1fr); }
+.dv-features--4 { grid-template-columns: repeat(4, 1fr); }
+.dv-feature {
+  background: var(--surface); border-radius: var(--r-card);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.dv-sec--alt .dv-feature { background: var(--canvas); }
+.dv-feature figure { background: var(--surface-2); }
+.dv-feature img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.dv-feature:hover img { transform: scale(1.05); }
+.dv-feature-body { padding: var(--s-20) var(--s-24) var(--s-24); }
+.dv-feature-num { font-family: var(--font-mark); font-weight: 700; font-size: 12px; letter-spacing: .14em; color: var(--action); }
+.dv-feature h3 {
+  margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -.01em;
+}
+.dv-feature p { margin-top: var(--s-8); font-size: 14px; line-height: 1.9; color: var(--text-muted); }
+
+/* ---------- 写真と文章の2カラム ---------- */
+.dv-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: center;
+}
+.dv-split--rev > :first-child { order: 2; }
+.dv-split-fig { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.dv-split-fig img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.dv-split-body p { margin-top: var(--s-16); font-size: 15px; line-height: 2; color: var(--text-muted); }
+.dv-split-body strong { color: var(--text); font-weight: 600; }
+
+/* ---------- チェックリスト（取扱い・対応内容） ---------- */
+.dv-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-8) var(--s-24); margin-top: var(--s-24); }
+.dv-list li {
+  display: flex; align-items: flex-start; gap: var(--s-12);
+  padding: var(--s-12) 0; border-bottom: 1px solid var(--hairline);
+  font-size: 15px; color: var(--text);
+}
+.dv-list li::before {
+  content: ""; flex: none; width: 18px; height: 18px; margin-top: 4px; border-radius: 50%;
+  background: rgba(64, 167, 58, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2 5 8.2 9 4' fill='none' stroke='%232F7F2A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+
+/* ---------- 写真ギャラリー ---------- */
+.dv-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-12); }
+.dv-gallery--2 { grid-template-columns: repeat(2, 1fr); }
+.dv-gallery figure { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.dv-gallery img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.dv-gallery figcaption { padding: var(--s-8) var(--s-4) 0; font-size: 12.5px; color: var(--text-muted); background: var(--canvas); }
+.dv-sec--alt .dv-gallery figcaption { background: var(--surface); }
+
+/* ---------- 概要表 ---------- */
+.dv-spec { border-top: 1px solid var(--hairline); }
+.dv-spec > div {
+  display: grid; grid-template-columns: 180px 1fr; gap: var(--s-24);
+  padding: var(--s-16) var(--s-8); border-bottom: 1px solid var(--hairline);
+}
+.dv-spec dt { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+.dv-spec dd { font-size: 15px; color: var(--text); }
+.dv-spec dd a { color: var(--action-deep); border-bottom: 1px solid currentColor; }
+
+/* ---------- ほかの事業 ---------- */
+.dv-related { background: var(--surface); }
+.dv-related-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-12); }
+.dv-related-list > li > a, .dv-related-list > li > span {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-8);
+  padding: var(--s-16) var(--s-20); border-radius: var(--r-card);
+  background: var(--canvas); color: var(--text);
+  font-size: 14px; font-weight: 600;
+  transition: background .3s, color .3s;
+}
+.dv-related-list li span span { display: block; min-width: 0; }
+.dv-related-list a small, .dv-related-list span small {
+  display: block; font-size: 10px; font-weight: 500; letter-spacing: .2em; color: var(--text-muted); transition: color .3s;
+}
+.dv-related-list a svg { width: 14px; height: 14px; flex: none; color: var(--action); transition: transform .35s var(--ease), color .3s; }
+.dv-related-list a:hover { background: var(--action); color: var(--text-onaccent); }
+.dv-related-list a:hover small, .dv-related-list a:hover svg { color: var(--text-onaccent); }
+.dv-related-list a:hover svg { transform: translateX(3px); }
+.dv-related-list .is-current { box-shadow: inset 0 0 0 2px var(--action); }
+.dv-related-list .is-current em {
+  flex: none; white-space: nowrap;
+  font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  padding: 2px 8px; border-radius: var(--r-pill); background: var(--action); color: var(--text-onaccent);
+}
+
+/* ---------- 注記 ---------- */
+.dv-note { margin-top: var(--s-24); font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+.dv-note a { color: var(--action-deep); border-bottom: 1px solid currentColor; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .dv-hero-grid, .dv-split { grid-template-columns: 1fr; }
+  .dv-split--rev > :first-child { order: 0; }
+  .dv-stats, .dv-stats--3 { grid-template-columns: 1fr 1fr; }
+  .dv-stats li:nth-child(2n) { border-right: 0; }
+  .dv-stats li { border-bottom: 1px solid var(--hairline); }
+  .dv-features, .dv-features--4 { grid-template-columns: 1fr 1fr; }
+  .dv-features--2 { grid-template-columns: 1fr; }
+  .dv-list { grid-template-columns: 1fr; }
+  .dv-gallery { grid-template-columns: 1fr 1fr; }
+  .dv-related-list { grid-template-columns: 1fr 1fr; }
+  .dv-spec > div { grid-template-columns: 1fr; gap: var(--s-4); }
+  .dv-sec-lead { margin-top: calc(var(--s-24) * -1); }
+}
+@media (max-width: 560px) {
+  .dv-features, .dv-features--4 { grid-template-columns: 1fr; }
+  .dv-stat-num { font-size: 30px; }
+  .dv-stats li { padding: var(--s-24) var(--s-12) var(--s-16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dv-hero-fig img { animation: none; }
+}

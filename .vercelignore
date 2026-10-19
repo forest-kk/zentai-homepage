@@ -1,0 +1,6 @@
+# 作業用・バックアップ（サイト表示には不要）
+*.bak
+serve.py
+tools/
+data/
+.DS_Store

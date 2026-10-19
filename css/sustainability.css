@@ -1,0 +1,152 @@
+/* ============================================================
+   FOREST — 安全と環境への取り組み
+   style.css / company.css / wood.css / division.css / workstyle.css の後に読む。
+   ============================================================ */
+
+/* ---------- 安全五原則 ---------- */
+.su-principles { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: start; }
+.su-principles .s-head { margin-bottom: 0; }
+.su-principles-lead { margin-top: var(--s-16); font-size: 15px; line-height: 1.9; color: var(--text-muted); }
+.su-rules { background: var(--canvas); border-radius: var(--r-card); padding: var(--s-8) var(--s-32); }
+.su-rules li {
+  display: flex; align-items: center; gap: var(--s-24);
+  padding: var(--s-20) 0; border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-min); font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: var(--text); letter-spacing: .02em;
+}
+.su-rules li:last-child { border-bottom: 0; }
+.su-rules span {
+  flex: none; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 17px; font-weight: 700; color: var(--text-onaccent); background: var(--action);
+}
+
+/* ---------- ルールブックと教育 ---------- */
+.su-rulebook { display: grid; grid-template-columns: .85fr 1.15fr; gap: var(--s-16); }
+.su-book { background: var(--surface); border-radius: var(--r-card); padding: var(--s-32); }
+.su-book-label { font-size: 14px; font-weight: 600; letter-spacing: .08em; color: var(--text); }
+.su-book-num {
+  margin: var(--s-4) 0 var(--s-16);
+  font-family: var(--font-mark); font-weight: 700; font-size: 16px; color: var(--text);
+}
+.su-book-num span { font-size: clamp(48px, 5vw, 64px); line-height: 1.1; letter-spacing: -.03em; color: var(--accent); margin: 0 4px; }
+.su-book-num i { font-style: normal; font-size: 16px; font-weight: 600; }
+.su-book p:not(.su-book-label):not(.su-book-num) { margin-top: var(--s-8); font-size: 14.5px; line-height: 1.95; color: var(--text-muted); }
+.su-edu { background: var(--surface); border-radius: var(--r-card); overflow: hidden; }
+.su-edu figure { background: var(--surface-2); }
+.su-edu img { width: 100%; height: auto; aspect-ratio: 2/1; object-fit: cover; display: block; }
+.su-edu > div { padding: var(--s-24) var(--s-32) var(--s-32); }
+.su-edu h3 { font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text); }
+.su-edu p { margin-top: var(--s-8); font-size: 14.5px; line-height: 1.9; color: var(--text-muted); }
+.su-edu .dv-list { grid-template-columns: 1fr; gap: 0; margin-top: var(--s-12); }
+.su-edu .dv-list li { padding: var(--s-8) 0; font-size: 14.5px; }
+
+/* ---------- 熱中症対策 ---------- */
+.su-heat-stats li:nth-child(n) { background: transparent; }
+.su-sub {
+  margin-top: clamp(var(--s-40), 5vw, var(--s-56)); margin-bottom: var(--s-20);
+  font-family: var(--font-min); font-size: 20px; font-weight: 700; color: var(--text);
+}
+/* 年ごとの対策を1本の線でつなぐ */
+.su-years {
+  position: relative;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--s-8);
+}
+.su-years::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 17px; height: 2px;
+  background: var(--rule); border-radius: 2px;
+}
+.su-years > li { position: relative; padding-top: 44px; }
+.su-years > li::before {
+  content: ""; position: absolute; left: 0; top: 11px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--action);
+}
+.su-years > li.is-now::before { background: var(--action); box-shadow: 0 0 0 5px rgba(64, 167, 58, .16); }
+.su-years time {
+  position: absolute; left: 22px; top: 4px;
+  font-family: var(--font-mark); font-weight: 700; font-size: 15px; color: var(--accent); letter-spacing: .02em;
+}
+.su-years ul { display: grid; gap: var(--s-8); }
+.su-years ul li {
+  background: var(--canvas); border-radius: var(--s-8);
+  padding: var(--s-8) var(--s-12); font-size: 13px; line-height: 1.6; color: var(--text);
+}
+.su-years .is-now ul li { box-shadow: inset 0 0 0 1.5px var(--action); }
+
+.su-flow { margin-top: var(--s-8); }
+.su-flow ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-12); }
+.su-flow li {
+  position: relative; background: var(--canvas); border-radius: var(--r-card);
+  padding: var(--s-20); font-size: 14.5px; font-weight: 600; line-height: 1.7; color: var(--text);
+}
+.su-flow li span {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; margin-bottom: var(--s-12);
+  font-family: var(--font-mark); font-size: 13px; font-weight: 700; color: var(--action-deep); background: rgba(64, 167, 58, .12);
+}
+.su-flow li small { display: block; margin-top: var(--s-8); font-size: 12.5px; font-weight: 400; color: var(--text-muted); }
+.su-flow li:not(:last-child)::after {
+  content: ""; position: absolute; z-index: 2; right: calc(var(--s-12) / -2 - 11px); top: 50%; margin-top: -11px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--action) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 10px no-repeat;
+  box-shadow: 0 0 0 4px var(--surface);
+}
+
+/* ---------- 木を活かしきる ---------- */
+.su-cycle { display: grid; gap: var(--s-16); }
+.su-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: var(--s-24); align-items: center;
+  padding: var(--s-20); background: var(--surface); border-radius: var(--r-card);
+}
+.su-no { font-family: var(--font-mark); font-weight: 700; font-size: 12px; letter-spacing: .14em; color: var(--action); }
+.su-from h3 { margin-top: var(--s-4); font-family: var(--font-min); font-size: 19px; font-weight: 700; color: var(--text); }
+.su-chain { display: flex; align-items: center; gap: var(--s-12); }
+.su-step { flex: 1 1 0; min-width: 0; max-width: 240px; }
+.su-chain figure.su-step { border-radius: var(--s-8); overflow: hidden; background: var(--canvas); }
+.su-chain figure img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.su-chain figcaption { padding: var(--s-8) var(--s-12); font-size: 12.5px; font-weight: 500; color: var(--text); }
+.su-arrow { flex: none; width: 22px; height: 22px; color: var(--action); }
+.su-dest {
+  align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: var(--s-8);
+  padding: var(--s-16) var(--s-20); border-radius: var(--s-8);
+  background: var(--canvas); box-shadow: inset 0 0 0 2px var(--action);
+}
+.su-dest p {
+  display: flex; align-items: center; gap: var(--s-8);
+  font-family: var(--font-min); font-size: 17px; font-weight: 700; color: var(--action-deep);
+}
+.su-dest p::before {
+  content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(64, 167, 58, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2 5 8.2 9 4' fill='none' stroke='%232F7F2A' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.su-chain figure.su-dest-fig { box-shadow: inset 0 0 0 2px var(--action); padding: 2px; }
+.su-chain figure.su-dest-fig img { border-radius: 6px 6px 0 0; }
+.su-chain figure.su-dest-fig figcaption { color: var(--action-deep); font-weight: 700; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .su-principles, .su-rulebook { grid-template-columns: 1fr; }
+  .su-rules { padding: var(--s-4) var(--s-20); }
+  .su-rules li { gap: var(--s-16); padding: var(--s-16) 0; }
+  .su-rules span { width: 36px; height: 36px; font-size: 15px; }
+  /* 年表は縦に */
+  .su-years { grid-template-columns: 1fr; gap: var(--s-16); padding-left: 0; }
+  .su-years::before { left: 6px; right: auto; top: 8px; bottom: 8px; width: 2px; height: auto; }
+  .su-years > li { padding: 0 0 0 36px; }
+  .su-years > li::before { top: 4px; }
+  .su-years time { position: static; display: block; margin-bottom: var(--s-8); }
+  .su-years ul { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .su-flow ol { grid-template-columns: 1fr 1fr; gap: var(--s-24) var(--s-12); }
+  .su-flow li:nth-child(2)::after { display: none; }
+  .su-row { grid-template-columns: 1fr; gap: var(--s-12); }
+}
+@media (max-width: 560px) {
+  .su-book, .su-edu > div { padding: var(--s-24); }
+  .su-flow ol { grid-template-columns: 1fr; }
+  .su-flow li:not(:last-child)::after { right: auto; left: 50%; top: auto; bottom: calc(var(--s-24) / -2 - 11px); margin: 0 0 0 -11px; transform: rotate(90deg); }
+  .su-flow li:nth-child(2)::after { display: block; }
+  .su-chain { flex-direction: column; align-items: stretch; }
+  /* 縦並びでは flex-basis:0 が高さに効いて写真が潰れるので、伸縮を止める */
+  .su-step { max-width: none; flex: none; }
+  .su-arrow { align-self: center; transform: rotate(90deg); }
+}
+
+.su-rules, .su-years, .su-flow ol, .su-cycle { list-style: none; }

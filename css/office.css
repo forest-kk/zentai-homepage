@@ -1,0 +1,80 @@
+/* ============================================================
+   FOREST — 事業所一覧
+   style.css / company.css の後に読む。
+   ============================================================ */
+
+.cp-head .wd-breadcrumb { margin-bottom: var(--s-16); }
+.of-lead { margin-top: var(--s-16); font-size: 15px; line-height: 1.9; color: var(--text-muted); }
+.of-anchor a { display: inline-flex; align-items: center; gap: var(--s-8); }
+.of-anchor a span {
+  font-size: 11px; font-weight: 700; min-width: 22px; padding: 1px 7px; border-radius: var(--r-pill);
+  background: var(--surface); color: var(--text-muted); text-align: center; transition: background .3s, color .3s;
+}
+.of-anchor a:hover span { background: rgba(255, 255, 255, .22); color: var(--text-onaccent); }
+
+.of-sec { background: var(--canvas); }
+.of-sec--alt { background: var(--surface); }
+.of-head .cp-h2 { display: flex; align-items: baseline; gap: var(--s-16); }
+.of-count { font-size: 14px; font-weight: 600; color: var(--text-muted); letter-spacing: .04em; }
+.of-count b { font-family: var(--font-mark); font-size: 28px; font-weight: 700; color: var(--accent); margin-right: 2px; letter-spacing: -.02em; }
+
+.of-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-24) var(--s-20); }
+.of-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border-radius: var(--r-card); overflow: hidden;
+}
+.of-sec--alt .of-card { background: var(--canvas); }
+.of-fig { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--surface-2); }
+.of-fig img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.of-card:hover .of-fig img { transform: scale(1.05); }
+/* 写真のない拠点はロゴを薄く置いて面をそろえる */
+.of-fig.is-blank { display: grid; place-items: center; }
+.of-fig.is-blank img { width: 44%; height: auto; object-fit: contain; opacity: .28; }
+.of-card:hover .of-fig.is-blank img { transform: none; }
+
+.of-body { flex: 1; display: flex; flex-direction: column; padding: var(--s-20) var(--s-24) var(--s-24); }
+.of-cat { display: flex; align-items: center; gap: var(--s-8); font-size: 11px; font-weight: 600; letter-spacing: .12em; color: var(--text-muted); }
+.of-new {
+  font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  padding: 2px 8px; border-radius: var(--r-pill); background: var(--action); color: var(--text-onaccent);
+}
+.of-body h3 {
+  margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 19px; font-weight: 700; line-height: 1.45; color: var(--text); letter-spacing: -.01em;
+}
+.of-body h3 small { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+.of-addr { margin-top: var(--s-12); font-size: 14px; line-height: 1.75; color: var(--text); }
+.of-addr span { font-size: 12.5px; color: var(--text-muted); }
+.of-tel { margin-top: var(--s-8); display: flex; flex-wrap: wrap; gap: 2px var(--s-16); font-family: var(--font-mark); font-size: 14px; font-weight: 600; }
+.of-tel a { color: var(--text); }
+.of-tel a:hover { color: var(--action-deep); }
+.of-tel span { color: var(--text-muted); font-weight: 500; }
+
+.of-links {
+  margin-top: auto; padding-top: var(--s-16);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-8) var(--s-16);
+}
+.of-map {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--action-deep);
+  padding: 7px 14px; border-radius: var(--r-pill); background: rgba(64, 167, 58, .1);
+  transition: background .3s, color .3s;
+}
+.of-map svg { width: 15px; height: 15px; }
+.of-map:hover { background: var(--action); color: var(--text-onaccent); }
+.of-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--rule); padding-bottom: 1px;
+  transition: color .3s, border-color .3s;
+}
+.of-more svg { width: 13px; height: 13px; transition: transform .35s var(--ease); }
+.of-more:hover { color: var(--action-deep); border-color: currentColor; }
+.of-more:hover svg { transform: translateX(3px); }
+
+@media (max-width: 900px) {
+  .of-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .of-grid { grid-template-columns: 1fr; }
+  .of-body { padding: var(--s-16) var(--s-20) var(--s-20); }
+}

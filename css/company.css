@@ -1,0 +1,262 @@
+/* ============================================================
+   FOREST — 会社案内ページ
+   style.css のトークンを共用。ここは差分だけ。
+   ============================================================ */
+
+.cp-h2 {
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 38px); line-height: 1.5; letter-spacing: -.01em;
+  color: var(--text);
+}
+
+/* ---------- ページヘッダー ---------- */
+.cp-head {
+  padding: calc(var(--header-h) + clamp(var(--s-56), 8vw, var(--s-112))) 0 clamp(var(--s-32), 4vw, var(--s-56));
+  background: var(--surface);
+  border-bottom: 1px solid var(--hairline);
+}
+.cp-title {
+  margin-top: var(--s-16);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(34px, 5.5vw, 62px); line-height: 1.25; letter-spacing: -.02em;
+  color: var(--text);
+}
+.cp-anchor { margin-top: var(--s-32); display: flex; flex-wrap: wrap; gap: var(--s-8); }
+.cp-anchor a {
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  padding: var(--s-8) var(--s-20); border-radius: var(--r-pill);
+  background: var(--canvas); color: var(--text);
+  transition: background .3s, color .3s;
+}
+.cp-anchor a:hover { background: var(--action); color: var(--text-onaccent); }
+
+/* ---------- ごあいさつ ---------- */
+.cp-greeting { background: var(--canvas); }
+.cp-greet-grid {
+  display: grid; grid-template-columns: 1fr .82fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: start;
+}
+.cp-greet-text .cp-h2 { margin: var(--s-16) 0 var(--s-24); }
+.cp-greet-body p { color: var(--text-muted); font-size: 15px; margin-bottom: var(--s-16); line-height: 2; }
+.cp-sign {
+  margin-top: var(--s-32); padding-top: var(--s-20);
+  border-top: 1px solid var(--hairline);
+  font-size: 13px; color: var(--text-muted); letter-spacing: .08em;
+}
+.cp-sign strong {
+  display: block; margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 22px; font-weight: 700;
+  color: var(--text); letter-spacing: .04em;
+}
+.cp-greet-fig { border-radius: var(--r-card); overflow: hidden; position: sticky; top: calc(var(--header-h) + 24px); }
+.cp-greet-fig img { width: 100%; height: auto; display: block; aspect-ratio: 16/11; object-fit: cover; }
+.cp-greet-fig figcaption {
+  padding: var(--s-12) var(--s-4) 0;
+  font-size: 11px; letter-spacing: .16em; color: var(--text-muted);
+}
+
+/* ---------- 企業理念 ---------- */
+.cp-mission { background: var(--surface); }
+.cp-mission-list { display: grid; gap: var(--s-12); counter-reset: none; }
+.cp-mission-list li {
+  display: flex; gap: var(--s-24); align-items: flex-start;
+  background: var(--canvas); border-radius: var(--r-card);
+  padding: var(--s-24) var(--s-32);
+}
+.cp-m-num {
+  font-family: var(--font-mark); font-weight: 700; font-size: 14px;
+  letter-spacing: .08em; color: var(--action); flex: none; padding-top: 4px;
+}
+.cp-mission-list p { font-size: 15px; line-height: 1.9; color: var(--text-muted); }
+.cp-mission-list strong { color: var(--text); font-weight: 600; }
+
+/* ---------- 表（会社概要・事業内容） ---------- */
+.cp-profile { background: var(--canvas); }
+.cp-biz { background: var(--surface); }
+.cp-table { display: grid; border-top: 1px solid var(--hairline); }
+.cp-table > div {
+  display: grid; grid-template-columns: 220px 1fr; gap: var(--s-24);
+  padding: var(--s-20) var(--s-8);
+  border-bottom: 1px solid var(--hairline);
+}
+.cp-table dt { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: .04em; }
+.cp-table dd { font-size: 15px; color: var(--text-muted); line-height: 1.9; }
+.cp-sub { font-size: 13px; opacity: .75; margin-left: var(--s-4); }
+.cp-table--biz dt { color: var(--text); }
+.cp-table--biz > div:hover { background: rgba(64, 167, 58, .04); }
+/* 詳細ページがある事業部は行全体をリンクに */
+.cp-table--biz > div.has-link { position: relative; }
+.cp-table--biz > div.has-link dd { display: flex; align-items: center; justify-content: space-between; gap: var(--s-16); }
+.cp-biz-more {
+  flex: none; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600; color: var(--action-deep);
+  padding: 6px 14px; border-radius: var(--r-pill); background: rgba(64, 167, 58, .1);
+  transition: background .3s, color .3s;
+}
+.cp-biz-more svg { width: 13px; height: 13px; transition: transform .35s var(--ease); }
+.cp-biz-more::after { content: ""; position: absolute; inset: 0; }
+.cp-table--biz > div.has-link:hover .cp-biz-more { background: var(--action); color: var(--text-onaccent); }
+.cp-table--biz > div.has-link:hover .cp-biz-more svg { transform: translateX(3px); }
+
+/* 基本情報：表と本社写真 */
+.cp-profile-grid {
+  display: grid; grid-template-columns: 1.25fr 1fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-56)); align-items: start;
+}
+.cp-hq { position: sticky; top: calc(var(--header-h) + var(--s-24)); }
+.cp-hq img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; display: block; border-radius: var(--r-card); }
+.cp-hq figcaption { margin-top: var(--s-12); font-size: 13px; color: var(--text-muted); letter-spacing: .04em; }
+.cp-hq figcaption strong { color: var(--text); font-weight: 600; margin-right: var(--s-12); }
+
+/* ---------- 沿革 ---------- */
+.cp-history { background: var(--canvas); }
+.cp-timeline { position: relative; display: grid; gap: 0; }
+.cp-timeline::before {
+  content: ""; position: absolute; left: 167.5px; top: 8px; bottom: 8px;
+  width: 1px; background: var(--hairline);
+}
+.cp-timeline li {
+  /* 年号(140px) と本文のあいだの溝(56px)の中央に線と点を置く。年号には重ねない */
+  position: relative; display: grid; grid-template-columns: 140px 1fr;
+  gap: var(--s-56); padding: var(--s-16) 0;
+}
+.cp-timeline li::before {
+  content: ""; position: absolute; left: 163.5px; top: 26px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--canvas); border: 1.5px solid var(--accent);
+}
+.cp-tl-now::before { background: var(--accent) !important; border-color: var(--accent) !important; }
+.cp-tl-future::before { border-color: var(--action) !important; }
+.cp-year {
+  font-family: var(--font-mark); font-weight: 700; font-size: 24px;
+  color: var(--text); letter-spacing: -.02em; line-height: 1.2;
+  display: block; text-align: right;
+}
+.cp-year em {
+  display: block; font-family: var(--font-jp); font-weight: 400;
+  font-size: 11px; letter-spacing: .06em; color: var(--text-muted); margin-top: 3px;
+}
+.cp-timeline p { font-size: 15px; color: var(--text-muted); padding-top: var(--s-4); line-height: 1.8; }
+.cp-tl-now p, .cp-tl-future p { color: var(--text); font-weight: 500; }
+.cp-tl-future .cp-year { color: var(--action-deep); }
+
+/* 企業理念から、安全と環境の取り組みへ */
+.cp-mission-link {
+  margin-top: var(--s-24);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-16); flex-wrap: wrap;
+  padding: var(--s-20) var(--s-32); border-radius: var(--r-card);
+  background: var(--canvas); box-shadow: inset 0 0 0 2px var(--action);
+  transition: background .3s;
+}
+.cp-mission-link span { font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text); }
+.cp-mission-link small { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .2em; color: var(--text-muted); }
+.cp-mission-link em { display: inline-flex; align-items: center; gap: var(--s-8); font-style: normal; font-size: 14px; font-weight: 600; color: var(--action-deep); }
+.cp-mission-link svg { width: 16px; height: 16px; transition: transform .35s var(--ease); }
+.cp-mission-link:hover { background: rgba(64, 167, 58, .06); }
+.cp-mission-link:hover svg { transform: translateX(4px); }
+
+/* ---------- CTA ---------- */
+.cp-cta {
+  background: var(--text); color: var(--canvas); text-align: center;
+  padding: clamp(var(--s-72), 9vw, var(--s-112)) 0;
+}
+.cp-cta .s-eyebrow { color: rgba(255,255,255,.6); justify-content: center; }
+.cp-cta .s-eyebrow .dot { background: var(--action); }
+.cp-cta-inner { display: flex; flex-direction: column; align-items: center; }
+.cp-cta-title {
+  margin-top: var(--s-20);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(26px, 4.2vw, 46px); letter-spacing: -.01em; line-height: 1.5;
+  color: var(--canvas);
+}
+.cp-cta-lead { margin-top: var(--s-16); color: rgba(255,255,255,.7); font-size: 15px; }
+.cp-cta-actions { margin-top: var(--s-40); display: flex; gap: var(--s-12); flex-wrap: wrap; justify-content: center; }
+.cp-cta-actions .btn svg { width: 18px; height: 18px; }
+.cp-cta-actions .btn:hover svg { transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .cp-greet-grid { grid-template-columns: 1fr; }
+  .cp-greet-fig { position: static; order: -1; }
+  .cp-table > div { grid-template-columns: 1fr; gap: var(--s-4); }
+  .cp-profile-grid { grid-template-columns: 1fr; }
+  .cp-hq { position: static; order: -1; }
+  .cp-table--biz > div.has-link dd { flex-direction: column; align-items: flex-start; gap: var(--s-8); }
+  .cp-mission-list li { padding: var(--s-20); gap: var(--s-16); }
+  .cp-timeline::before { left: 5px; }
+  .cp-timeline li { grid-template-columns: 1fr; gap: var(--s-4); padding-left: var(--s-32); }
+  .cp-timeline li::before { left: 1px; top: 24px; }
+  .cp-year { text-align: left; padding-right: 0; display: flex; align-items: baseline; gap: var(--s-12); }
+  .cp-year em { margin-top: 0; }
+}
+
+@media (max-width: 520px) {
+  .cp-cta-actions { flex-direction: column; width: 100%; }
+  .cp-cta-actions .btn { justify-content: center; }
+}
+
+
+/* ============================================================
+   関連リンクページ
+   ============================================================ */
+.lk-lead { margin-top: var(--s-20); font-size: 15px; color: var(--text-muted); max-width: 46em; }
+.lk-body { background: var(--canvas); }
+.lk-head2 { margin-top: clamp(var(--s-56), 7vw, var(--s-72)); }
+
+.lk-list { display: grid; gap: var(--s-12); }
+.lk-list a {
+  display: grid; grid-template-columns: 190px 1fr auto;
+  align-items: center; gap: var(--s-32);
+  padding: var(--s-24) var(--s-32);
+  background: var(--surface); border-radius: var(--r-card);
+  transition: background .35s, transform .35s var(--ease);
+}
+.lk-list a:hover { background: var(--surface-2); transform: translateY(-2px); }
+.lk-logo {
+  display: grid; place-items: center;
+  background: #fff; border-radius: var(--r-sm);
+  padding: var(--s-12) var(--s-16);
+  aspect-ratio: 600 / 174;
+}
+.lk-logo img { width: 100%; height: auto; display: block; }
+.lk-body-txt { display: block; min-width: 0; }
+.lk-name {
+  display: block; font-family: var(--font-min); font-size: 17px; font-weight: 600;
+  color: var(--text); letter-spacing: .01em;
+}
+.lk-desc { display: block; font-size: 13.5px; color: var(--text-muted); margin-top: var(--s-4); line-height: 1.8; }
+.lk-url {
+  display: block; margin-top: var(--s-8);
+  font-size: 12px; letter-spacing: .06em; color: var(--action-deep);
+}
+.lk-list svg {
+  width: 18px; height: 18px; color: var(--text-muted);
+  transition: color .3s, transform .35s var(--ease);
+}
+.lk-list a:hover svg { color: var(--action); transform: translate(2px, -2px); }
+
+/* 公式SNS */
+.lk-sns { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-12); }
+.lk-sns a {
+  display: flex; align-items: center; gap: var(--s-12);
+  padding: var(--s-20) var(--s-24);
+  background: var(--surface); border-radius: var(--r-card);
+  transition: background .35s, transform .35s var(--ease);
+}
+.lk-sns a:hover { background: var(--surface-2); transform: translateY(-2px); }
+.lk-sns a:hover .lk-sns-ico { color: var(--action-deep); }
+.lk-sns-ico { width: 40px; height: 40px; display: block; flex: none; color: var(--text); }
+.lk-sns span { display: block; min-width: 0; font-size: 12.5px; color: var(--text-muted); word-break: break-all; }
+.lk-sns em {
+  display: block; font-family: var(--font-min); font-size: 15px; font-weight: 600;
+  color: var(--text); letter-spacing: .01em; margin-bottom: 2px;
+}
+
+@media (max-width: 900px) {
+  .lk-list a { grid-template-columns: 140px 1fr auto; gap: var(--s-20); padding: var(--s-20); }
+  .lk-sns { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .lk-list a { grid-template-columns: 1fr auto; }
+  .lk-logo { grid-column: 1 / -1; max-width: 220px; }
+}

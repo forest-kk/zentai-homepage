@@ -1,0 +1,298 @@
+/* ============================================================
+   FOREST — 木材事業部ページ
+   style.css / company.css のトークンを共用。差分のみ。
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+.wd-hero {
+  position: relative; min-height: 84svh;
+  display: flex; align-items: center; overflow: hidden;
+  background: var(--canvas);
+}
+.wd-hero-media { position: absolute; inset: 0; z-index: 0; }
+.wd-hero-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%;
+  display: block; animation: wdZoom 20s ease-out forwards;
+}
+@keyframes wdZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
+.wd-hero-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(100deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.92) 28%, rgba(255,255,255,.66) 52%, rgba(255,255,255,.28) 80%, rgba(255,255,255,.1) 100%),
+    linear-gradient(to top, var(--canvas) 2%, rgba(255,255,255,0) 26%);
+}
+.wd-hero-inner {
+  position: relative; z-index: 2;
+  width: min(var(--page), 92vw); margin-inline: auto; padding-top: var(--header-h);
+}
+.wd-hero-inner .s-eyebrow { margin-top: var(--s-16); }
+.wd-hero-title {
+  margin-top: var(--s-20);
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(36px, 6vw, 76px); line-height: 1.3; letter-spacing: -.02em;
+  color: var(--text);
+}
+.wd-hero-lead { margin-top: var(--s-24); color: var(--text-muted); font-size: 16px; line-height: 1.9; }
+
+/* ---------- リード ---------- */
+.wd-intro { background: var(--canvas); }
+.wd-intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: start;
+}
+.wd-intro-lead {
+  font-family: var(--font-min); font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 38px); line-height: 1.6; letter-spacing: -.01em;
+  color: var(--text);
+}
+.wd-intro-text { font-size: 15px; line-height: 2; color: var(--text-muted); }
+
+/* ---------- 製品 ---------- */
+.wd-products { background: var(--surface); }
+.wd-prod-list { display: grid; gap: clamp(var(--s-40), 5vw, var(--s-72)); }
+.wd-prod {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: clamp(var(--s-24), 4vw, var(--s-56)); align-items: center;
+}
+.wd-prod--rev .wd-prod-fig { order: 2; }
+.wd-prod--rev .wd-prod-body { order: 1; }
+.wd-prod-fig { border-radius: var(--r-card); overflow: hidden; background: var(--canvas); }
+.wd-prod-fig img {
+  width: 100%; height: auto; display: block; aspect-ratio: 16/10; object-fit: cover;
+  transform: scale(1.01); transition: transform .8s var(--ease);
+}
+.wd-prod:hover .wd-prod-fig img { transform: scale(1.05); }
+.wd-prod-num {
+  font-family: var(--font-mark); font-weight: 700; font-size: 13px;
+  letter-spacing: .12em; color: var(--action);
+}
+.wd-prod-body h3 {
+  margin-top: var(--s-8);
+  font-family: var(--font-min); font-size: clamp(20px, 2.2vw, 28px); font-weight: 700;
+  color: var(--text); letter-spacing: -.01em;
+}
+.wd-prod-body p { margin-top: var(--s-12); font-size: 15px; line-height: 2; color: var(--text-muted); }
+.wd-prod-body strong { color: var(--text); font-weight: 600; }
+.wd-tags { margin-top: var(--s-20); display: flex; flex-wrap: wrap; gap: var(--s-8); }
+.wd-tags li {
+  font-size: 12px; font-weight: 500; letter-spacing: .04em;
+  padding: var(--s-4) var(--s-12); border-radius: var(--r-pill);
+  background: var(--canvas); color: var(--text-muted);
+}
+
+/* ---------- 一貫体制 ---------- */
+.wd-flow { background: var(--canvas); }
+.wd-flow-lead { margin-top: var(--s-16); font-size: 15px; color: var(--text-muted); line-height: 1.9; }
+/* ---- ストリームライン：原木 → 製材 → 組立 を1本の線でつなぐ ---- */
+.wd-stream { margin-top: var(--s-8); }
+/* 容器ごとフェードさせず、線と点の演出だけに is-in を使う */
+.js .wd-stream[data-reveal] { opacity: 1; transform: none; }
+
+.wd-stream-list {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  /* 列間の余白は各工程の中身側で取り、線は隙間なくつなげる */
+  gap: 0;
+}
+.wd-st { display: flex; flex-direction: column; min-width: 0; }
+.wd-st-fig, .wd-st-body { margin-right: var(--s-32); }
+
+.wd-st-fig { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.wd-st-fig img {
+  width: 100%; height: auto; display: block; aspect-ratio: 16/10; object-fit: cover;
+  transform: scale(1.01); transition: transform .8s var(--ease);
+}
+.wd-st:hover .wd-st-fig img { transform: scale(1.05); }
+
+/* 線路 */
+.wd-track {
+  position: relative;
+  display: flex; align-items: center;
+  height: 44px; margin: var(--s-24) 0 var(--s-16);
+}
+.wd-node {
+  position: relative; z-index: 2; flex: none;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mark); font-weight: 700; font-size: 13px; letter-spacing: .02em;
+  background: var(--canvas); color: var(--text-muted);
+  border: 1.5px solid var(--rule);
+  transition: background .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+  transition-delay: calc(var(--i) * .7s);
+}
+.wd-line {
+  position: relative; flex: 1; height: 2px; margin: 0 6px;
+  background: var(--hairline); border-radius: 2px;
+  color: var(--rule);
+}
+.wd-line i {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: var(--action);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .7s var(--ease);
+  transition-delay: calc(var(--i) * .7s + .25s);
+}
+.wd-arrow {
+  position: absolute; right: -4px; top: 50%;
+  width: 14px; height: 14px; margin-top: -7px;
+  transition: color .4s var(--ease);
+  transition-delay: calc(var(--i) * .7s + .8s);
+}
+.wd-end {
+  position: relative; z-index: 2; flex: none;
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  padding: var(--s-8) var(--s-16); border-radius: var(--r-pill);
+  background: var(--surface); color: var(--text-muted);
+  transition: background .5s var(--ease), color .5s var(--ease);
+  transition-delay: calc(var(--i) * .7s + .9s);
+}
+.wd-end:hover { background: var(--action-deep) !important; }
+
+/* 画面に入ったら左から順に点灯 */
+.wd-stream.is-in .wd-node {
+  background: var(--action); color: var(--text-onaccent); border-color: var(--action);
+  box-shadow: 0 0 0 6px rgba(64, 167, 58, .14);
+}
+.wd-stream.is-in .wd-line i { transform: scaleX(1); }
+.wd-stream.is-in .wd-arrow { color: var(--action); }
+.wd-stream.is-in .wd-end { background: var(--action); color: var(--text-onaccent); }
+
+/* 本文 */
+.wd-step-num {
+  font-family: var(--font-mark); font-weight: 700; font-size: 11px;
+  letter-spacing: .18em; color: var(--action);
+}
+.wd-st-body h3 {
+  margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 20px; font-weight: 700;
+  color: var(--text); letter-spacing: -.01em;
+}
+.wd-st-body > p:not(.wd-step-num):not(.wd-out) {
+  margin-top: var(--s-8); font-size: 14px; line-height: 1.9; color: var(--text-muted);
+}
+/* 工程ごとの「成果物」— 丸太 → 角材 → 製品 の変化を見せる */
+.wd-out {
+  margin-top: var(--s-16);
+  display: inline-flex; align-items: center; gap: var(--s-8);
+  font-size: 13px; font-weight: 600; color: var(--text);
+  padding: var(--s-8) var(--s-16) var(--s-8) var(--s-8);
+  background: var(--surface); border-radius: var(--r-pill);
+}
+.wd-out em {
+  font-size: 10px; font-weight: 600; letter-spacing: .08em;
+  color: var(--text-onaccent); background: var(--text-muted);
+  padding: 3px 8px; border-radius: var(--r-pill);
+}
+.wd-st:last-child .wd-out em { background: var(--action); }
+.wd-out span { font-weight: 500; color: var(--text-muted); }
+.wd-out svg { width: 12px; height: 12px; color: var(--action); flex: none; }
+
+.wd-merit {
+  margin-top: var(--s-32);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-12);
+}
+.wd-merit li {
+  padding: var(--s-20) var(--s-24);
+  border-top: 2px solid var(--action);
+  background: var(--surface); border-radius: 0 0 var(--r-card) var(--r-card);
+  font-size: 14px; color: var(--text-muted); line-height: 1.8;
+}
+.wd-merit strong {
+  display: block; font-family: var(--font-min); font-size: 16px; font-weight: 600;
+  color: var(--text); margin-bottom: var(--s-4);
+}
+
+/* ---------- ワンストップ ---------- */
+.wd-onestop { background: var(--surface); }
+.wd-onestop-lead { font-size: 15px; line-height: 2; color: var(--text-muted); max-width: 52em; }
+.wd-chain {
+  margin-top: clamp(var(--s-32), 4vw, var(--s-56));
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-16);
+}
+.wd-ch {
+  position: relative;
+  background: var(--canvas); border-radius: var(--r-card);
+  display: flex; flex-direction: column;
+}
+.wd-ch-fig {
+  position: relative; border-radius: var(--r-card) var(--r-card) 0 0; overflow: hidden;
+  background: var(--surface-2);
+}
+.wd-ch-fig img {
+  width: 100%; height: auto; display: block; aspect-ratio: 16/10; object-fit: cover;
+  transform: scale(1.01); transition: transform .8s var(--ease);
+}
+.wd-ch:hover .wd-ch-fig img { transform: scale(1.06); }
+.wd-here {
+  position: absolute; left: var(--s-8); top: var(--s-8);
+  font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  background: var(--action); color: var(--text-onaccent);
+}
+.wd-ch--here { box-shadow: inset 0 0 0 2px var(--action); }
+.wd-ch-body { padding: var(--s-16) var(--s-16) var(--s-20); }
+.wd-ch-body span {
+  font-family: var(--font-mark); font-weight: 700; font-size: 11px;
+  letter-spacing: .12em; color: var(--action);
+}
+.wd-ch-body h3 {
+  margin-top: 2px;
+  font-family: var(--font-min); font-size: 15px; font-weight: 700; color: var(--text);
+}
+.wd-ch-body p { margin-top: var(--s-4); font-size: 12.5px; line-height: 1.75; color: var(--text-muted); }
+
+/* カード間の矢印：写真の高さの中央に置き、流れを1本に見せる */
+.wd-ch { container-type: inline-size; }
+.wd-ch:not(:last-child)::after {
+  content: ""; position: absolute; z-index: 3;
+  right: calc(var(--s-16) / -2 - 13px);
+  top: calc(62.5cqw / 2 - 13px);          /* 写真は 16:10 = 幅×0.625 */
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--action) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat;
+  box-shadow: 0 0 0 4px var(--surface);
+}
+
+.wd-ch-body a { color: var(--action-deep); border-bottom: 1px solid currentColor; }
+.wd-onestop-note { margin-top: var(--s-24); font-size: 14px; color: var(--text-muted); }
+.wd-onestop-note a { color: var(--action-deep); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .wd-hero { min-height: 72svh; }
+  .wd-intro-grid { grid-template-columns: 1fr; gap: var(--s-24); }
+  .wd-prod, .wd-prod--rev { grid-template-columns: 1fr; gap: var(--s-20); }
+  .wd-prod--rev .wd-prod-fig { order: 0; }
+  .wd-prod--rev .wd-prod-body { order: 0; }
+  /* 縦に流れるストリームライン：左に線路、右に写真と本文 */
+  .wd-stream-list { grid-template-columns: 1fr; }
+  .wd-st {
+    display: grid; grid-template-columns: 44px 1fr;
+    column-gap: var(--s-16);
+  }
+  .wd-st-fig, .wd-st-body { margin-right: 0; grid-column: 2; }
+  .wd-st-fig { grid-row: 1; }
+  .wd-st-body { grid-row: 2; padding-bottom: var(--s-40); }
+  .wd-track {
+    grid-column: 1; grid-row: 1 / span 2;
+    flex-direction: column; align-items: center;
+    height: auto; margin: 0;
+  }
+  .wd-line { flex: 1; width: 2px; height: auto; margin: 6px 0; }
+  .wd-line i { transform: scaleY(0); transform-origin: top; }
+  .wd-stream.is-in .wd-line i { transform: scaleY(1); }
+  .wd-arrow { right: auto; left: 50%; top: auto; bottom: -4px; margin: 0 0 0 -7px; transform: rotate(90deg); }
+  .wd-end { font-size: 11px; padding: var(--s-4) var(--s-8); writing-mode: horizontal-tb; }
+  .wd-merit { grid-template-columns: 1fr; }
+  .wd-chain { grid-template-columns: 1fr; gap: var(--s-20); }
+  .wd-ch { flex-direction: row; container-type: normal; }
+  .wd-ch-fig { width: 42%; flex: none; border-radius: var(--r-card) 0 0 var(--r-card); }
+  .wd-ch-fig img { height: 100%; }
+  .wd-ch-body { padding: var(--s-12) var(--s-16); align-self: center; }
+  .wd-ch:not(:last-child)::after {
+    right: auto; left: 50%; top: auto; bottom: calc(var(--s-20) / -2 - 13px);
+    margin-left: -13px; transform: rotate(90deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-hero-media img { animation: none; }
+}

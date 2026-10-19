@@ -1,0 +1,5 @@
+.vercel
+.env
+.env.*
+*.bak
+.DS_Store

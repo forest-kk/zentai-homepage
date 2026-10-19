@@ -1,0 +1,196 @@
+/* ============================================================
+   FOREST — 物流・包装事業部ページ
+   style.css / company.css / wood.css を共用。差分のみ。
+   ============================================================ */
+
+/* ---------- 数字 ---------- */
+.lg-stats {
+  margin-top: clamp(var(--s-40), 6vw, var(--s-72));
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+.lg-stats li { padding: var(--s-32) var(--s-20) var(--s-24); border-right: 1px solid var(--hairline); }
+.lg-stats li:last-child { border-right: 0; }
+.lg-stat-num {
+  display: block; font-family: var(--font-mark); font-weight: 700;
+  font-size: clamp(34px, 4vw, 50px); line-height: 1.1; letter-spacing: -.03em; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.lg-stat-num i { font-style: normal; font-size: 15px; font-weight: 600; letter-spacing: 0; margin-left: 4px; color: var(--text); }
+.lg-stats p { margin-top: var(--s-12); font-size: 14px; color: var(--text); line-height: 1.6; }
+.lg-stats small { display: block; font-size: 12px; color: var(--text-muted); letter-spacing: .04em; }
+
+/* ---------- 事業内容：写真は元解像度に合わせて控えめな幅に ---------- */
+.lg-svc .wd-prod { grid-template-columns: .9fr 1fr; }
+.lg-jump {
+  margin-top: var(--s-20);
+  display: inline-flex; align-items: center; gap: var(--s-8);
+  font-size: 14px; font-weight: 600; color: var(--action-deep);
+  padding-bottom: 2px; border-bottom: 1px solid currentColor;
+}
+.lg-jump svg { width: 15px; height: 15px; transition: transform .35s var(--ease); }
+.lg-jump:hover svg { transform: translateX(4px); }
+
+/* ---------- 取扱品目 ---------- */
+.lg-items { background: var(--canvas); }
+.lg-items-lead { font-size: 15px; line-height: 2; color: var(--text-muted); }
+.lg-cat {
+  margin-top: clamp(var(--s-32), 4vw, var(--s-40));
+  display: grid; grid-template-columns: 220px 1fr; gap: var(--s-32);
+  padding-top: var(--s-32); border-top: 1px solid var(--hairline);
+}
+.lg-cat-head span {
+  font-family: var(--font-mark); font-weight: 700; font-size: 12px; letter-spacing: .14em; color: var(--action);
+}
+.lg-cat-head h3 {
+  margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -.01em;
+}
+.lg-cat-head p { margin-top: var(--s-4); font-size: 13px; color: var(--text-muted); letter-spacing: .08em; }
+.lg-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-16); }
+.lg-cat-grid figure {
+  border-radius: var(--r-card); overflow: hidden; background: var(--surface);
+  aspect-ratio: 4/3;
+}
+.lg-cat-grid img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  /* 白背景の商品写真も、カードの面として揃えて見せる */
+  mix-blend-mode: multiply;
+  transition: transform .7s var(--ease);
+}
+.lg-cat-grid li:hover img { transform: scale(1.06); }
+.lg-cat-grid p { margin-top: var(--s-8); font-size: 14px; font-weight: 600; color: var(--text); }
+.lg-items-note {
+  margin-top: var(--s-32); padding: var(--s-16) var(--s-20);
+  background: var(--surface); border-radius: var(--r-card);
+  font-size: 14px; color: var(--text-muted);
+}
+
+/* ---------- 倉庫網の歩み（wood のストリームラインを4工程で） ---------- */
+.lg-growth { background: var(--surface); }
+.lg-growth .wd-node { background: var(--canvas); }
+.lg-growth .wd-line { background: var(--rule); }
+.lg-growth .wd-out { background: var(--canvas); }
+.lg-growth .wd-end { background: var(--canvas); }
+.lg-stream { margin-top: var(--s-40); }
+@media (min-width: 901px) {
+  .lg-stream .wd-stream-list { grid-template-columns: repeat(4, 1fr); }
+  .lg-stream .wd-st-fig, .lg-stream .wd-st-body { margin-right: var(--s-24); }
+}
+.lg-stream .wd-step-num { letter-spacing: .1em; font-size: 12px; }
+.lg-stream .wd-st-body h3 { font-size: 18px; }
+.lg-stream .wd-st:last-child .wd-out em { background: var(--action); }
+/* 写真がない年は、認可番号そのものを見せる */
+.lg-st-mark {
+  aspect-ratio: 16/10; display: grid; place-items: center;
+  background: var(--canvas) !important; box-shadow: inset 0 0 0 1px var(--hairline);
+  text-align: center;
+}
+.lg-st-mark small { display: block; font-size: 11px; font-weight: 600; letter-spacing: .16em; color: var(--text-muted); }
+.lg-st-mark strong {
+  display: block; margin-top: 2px;
+  font-family: var(--font-mark); font-size: clamp(24px, 2.4vw, 30px); font-weight: 800; letter-spacing: -.02em; color: var(--accent-deep);
+}
+.lg-st-mark span { display: block; margin-top: 4px; font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--text-muted); }
+
+/* ---------- FLC山鹿 ---------- */
+.lg-flc { background: var(--canvas); }
+.lg-flc-grid {
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: start;
+}
+.lg-flc-sub { margin-top: calc(var(--s-8) * -1); font-size: 14px; font-weight: 600; letter-spacing: .08em; color: var(--text-muted); }
+.lg-flc-lead { margin-top: var(--s-20); font-size: 15px; line-height: 2; color: var(--text-muted); }
+.lg-spec { margin-top: var(--s-32); border-top: 1px solid var(--hairline); }
+.lg-spec > div {
+  display: grid; grid-template-columns: 96px 1fr; gap: var(--s-16);
+  padding: var(--s-12) 0; border-bottom: 1px solid var(--hairline);
+}
+.lg-spec dt { font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: .06em; }
+.lg-spec dd { font-size: 15px; color: var(--text); }
+.lg-flc-actions { margin-top: var(--s-32); display: flex; align-items: center; flex-wrap: wrap; gap: var(--s-16) var(--s-32); }
+.lg-flc-actions .lg-jump { margin-top: 0; }
+.lg-flc-photos { display: grid; gap: var(--s-16); position: sticky; top: calc(var(--header-h) + var(--s-24)); }
+.lg-flc-photos figure { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.lg-flc-photos img { width: 100%; height: auto; aspect-ratio: 3/2; object-fit: cover; display: block; }
+.lg-flc-photos figure:last-child { width: 78%; margin-left: auto; }
+
+/* ---------- 営業倉庫一覧 ---------- */
+.lg-wh { background: var(--surface); }
+.lg-wh-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-16);
+}
+.lg-wh-pref--main { grid-row: span 2; }
+.lg-wh-pref { background: var(--canvas); border-radius: var(--r-card); padding: var(--s-24) var(--s-24) var(--s-8); }
+.lg-wh-pref header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding-bottom: var(--s-12); border-bottom: 2px solid var(--text);
+}
+.lg-wh-pref h3 { font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text); }
+.lg-wh-pref header span { font-size: 12px; color: var(--text-muted); }
+.lg-wh-pref header b { font-family: var(--font-mark); font-size: 26px; font-weight: 700; color: var(--accent); margin-right: 3px; }
+.lg-wh-pref li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-16);
+  padding: var(--s-16) 0; border-bottom: 1px solid var(--hairline);
+}
+.lg-wh-pref li:last-child { border-bottom: 0; }
+.lg-wh-pref strong { font-size: 15px; font-weight: 600; color: var(--text); display: inline-flex; align-items: center; gap: var(--s-8); }
+.lg-wh-pref strong em {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  padding: 2px 8px; border-radius: var(--r-pill); background: var(--action); color: var(--text-onaccent);
+}
+.lg-wh-pref li span { font-size: 13px; color: var(--text-muted); text-align: right; }
+.lg-wh-pref--main li { padding: var(--s-20) 0; }
+.lg-wh-note { margin-top: var(--s-24); font-size: 14px; color: var(--text-muted); }
+
+/* ---------- ピタパレット ---------- */
+.lg-pita { background: var(--canvas); }
+.lg-pita-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: center;
+}
+.lg-pita-photos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-16); max-width: 480px; }
+.lg-pita-photos figure { border-radius: var(--r-card); overflow: hidden; background: var(--surface); }
+.lg-pita-photos figure:last-child { margin-top: var(--s-40); }
+.lg-pita-photos img { width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; display: block; }
+.lg-pita-lead { font-size: 15px; line-height: 2; color: var(--text-muted); }
+.lg-pita-facts { margin-top: var(--s-24); display: grid; gap: var(--s-8); }
+.lg-pita-facts li { display: flex; align-items: center; gap: var(--s-12); font-size: 14px; color: var(--text); }
+.lg-pita-facts span {
+  flex: none; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  padding: 2px 10px; border-radius: var(--r-pill); background: var(--surface); color: var(--text-muted);
+}
+
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .lg-stats { grid-template-columns: 1fr 1fr; }
+  .lg-stats li:nth-child(2) { border-right: 0; }
+  .lg-stats li:nth-child(-n+2) { border-bottom: 1px solid var(--hairline); }
+  .lg-svc .wd-prod { grid-template-columns: 1fr; }
+  .lg-cat { grid-template-columns: 1fr; gap: var(--s-16); }
+  .lg-cat-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-16) var(--s-12); }
+  .lg-flc-grid, .lg-pita-grid { grid-template-columns: 1fr; }
+  .lg-flc-photos { position: static; grid-template-columns: 1fr 1fr; }
+  .lg-flc-photos figure:last-child { width: auto; }
+  .lg-pita-photos { max-width: none; }
+  .lg-pita-text { order: -1; }
+  .lg-wh-grid { grid-template-columns: 1fr; }
+  .lg-wh-pref--main { grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .lg-stats li { padding: var(--s-24) var(--s-12) var(--s-16); }
+  .lg-stat-num { font-size: 30px; }
+  .lg-spec > div { grid-template-columns: 76px 1fr; gap: var(--s-12); }
+  .lg-spec dd { font-size: 14px; }
+}
+
+/* FLC山鹿：見出しと正式名称を近づける（末尾に置いて上書き） */
+.lg-flc .s-head { margin-bottom: 0; }
+.lg-flc-sub { margin-top: var(--s-12); }
+.lg-pita .s-head { margin-bottom: var(--s-24); }
+.lg-pita-photos { align-items: start; }
+@media (max-width: 560px) {
+  .lg-growth .wd-flow-lead br { display: none; }
+}
+.lg-wh-note a { margin-left: var(--s-8); color: var(--action-deep); border-bottom: 1px solid currentColor; font-weight: 600; }

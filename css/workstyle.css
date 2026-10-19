@@ -1,0 +1,136 @@
+/* ============================================================
+   FOREST — 働く環境（採用の下層）
+   style.css / company.css / wood.css / division.css の後に読む。
+   ============================================================ */
+
+.ws-anchor { margin-top: var(--s-32); }
+.ws-anchor a { background: var(--surface); }
+
+/* ---------- 仕事の種類 ---------- */
+.ws-jobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-16); }
+.ws-jobs li { background: var(--canvas); border-radius: var(--r-card); padding: var(--s-32) var(--s-24) var(--s-24); }
+.ws-job-ico {
+  width: 52px; height: 52px; border-radius: var(--r-card);
+  display: grid; place-items: center; background: rgba(64, 167, 58, .1); color: var(--action-deep);
+}
+.ws-job-ico svg { width: 26px; height: 26px; }
+.ws-job-en { margin-top: var(--s-20); font-size: 11px; font-weight: 600; letter-spacing: .18em; color: var(--text-muted); }
+.ws-jobs h3 {
+  margin-top: var(--s-4);
+  font-family: var(--font-min); font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -.01em;
+}
+.ws-jobs h3 span { margin-left: var(--s-8); font-size: 15px; font-weight: 600; color: var(--action-deep); letter-spacing: 0; }
+.ws-job-key { margin-top: var(--s-12); font-size: 15px; font-weight: 600; color: var(--text); }
+.ws-jobs li > p:last-child { margin-top: var(--s-8); font-size: 14px; line-height: 1.9; color: var(--text-muted); }
+
+/* ---------- 1日の流れ ---------- */
+.ws-day { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(var(--s-32), 5vw, var(--s-72)); align-items: start; }
+.ws-timeline { position: relative; }
+.ws-timeline::before {
+  content: ""; position: absolute; left: 96px; top: 14px; bottom: 14px; width: 2px;
+  background: var(--hairline); border-radius: 2px;
+}
+.ws-timeline li {
+  position: relative; display: grid; grid-template-columns: 80px 1fr; gap: 48px;
+  padding: var(--s-16) 0;
+}
+.ws-timeline li::before {
+  content: ""; position: absolute; left: 91px; top: 26px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--canvas); border: 2px solid var(--action);
+}
+.ws-timeline li:first-child::before, .ws-timeline li.is-end::before { background: var(--action); }
+.ws-timeline time {
+  font-family: var(--font-mark); font-weight: 700; font-size: 22px; line-height: 1.3;
+  color: var(--accent); text-align: right; letter-spacing: -.01em; font-variant-numeric: tabular-nums;
+}
+.ws-timeline time small { display: block; font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0; }
+.ws-timeline h3 { font-family: var(--font-min); font-size: 17px; font-weight: 700; color: var(--text); padding-top: 3px; }
+.ws-day-photos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-12); position: sticky; top: calc(var(--header-h) + var(--s-24)); }
+.ws-day-photos figure { border-radius: var(--r-card); overflow: hidden; background: var(--surface); position: relative; }
+.ws-day-photos img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.ws-day-photos figcaption {
+  position: absolute; left: var(--s-8); bottom: var(--s-8);
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  padding: 3px 10px; border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); color: var(--text);
+}
+.ws-note { margin-top: var(--s-32); font-size: 14px; color: var(--text-muted); }
+.ws-note a { margin-left: var(--s-8); color: var(--action-deep); border-bottom: 1px solid currentColor; font-weight: 600; }
+
+/* ---------- 給与・休日 ---------- */
+.ws-pay { display: grid; grid-template-columns: 1fr; gap: var(--s-16); }
+.ws-pay-list {
+  background: var(--canvas); border-radius: var(--r-card); padding: var(--s-8) var(--s-24);
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-40);
+}
+.ws-pay-list > div {
+  display: grid; grid-template-columns: 112px 1fr; gap: var(--s-16);
+  padding: var(--s-16) 0; border-bottom: 1px solid var(--hairline);
+}
+.ws-pay-list > div:nth-last-child(-n+2) { border-bottom: 0; }
+.ws-pay-list dt { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.ws-pay-list dd { font-size: 15px; color: var(--text); }
+
+.ws-cond { margin-top: var(--s-40); grid-template-columns: repeat(5, 1fr); }
+.ws-cond li { padding-left: var(--s-16); padding-right: var(--s-16); }
+.ws-cond .dv-stat-num { font-size: clamp(28px, 3vw, 40px); }
+.ws-cond .dv-stat-num i { font-size: 13px; }
+
+/* ---------- 福利厚生 ---------- */
+.ws-benefits { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s-16); }
+.ws-benefit { grid-column: span 2; background: var(--surface); border-radius: var(--r-card); padding: var(--s-24); }
+.ws-benefit:nth-child(n+4) { grid-column: span 3; }
+.ws-benefit h3 {
+  display: flex; align-items: baseline; gap: var(--s-12);
+  font-family: var(--font-min); font-size: 18px; font-weight: 700; color: var(--text);
+  padding-bottom: var(--s-12); border-bottom: 2px solid var(--text);
+}
+.ws-benefit h3 span { font-family: var(--font-mark); font-size: 12px; letter-spacing: .12em; color: var(--action); }
+.ws-benefit ul { margin-top: var(--s-12); display: flex; flex-wrap: wrap; gap: var(--s-8); }
+.ws-benefit li {
+  font-size: 14px; font-weight: 500; color: var(--text);
+  padding: var(--s-8) var(--s-16); border-radius: var(--r-pill); background: var(--canvas);
+}
+.ws-benefit li small { margin-left: 6px; font-size: 11.5px; color: var(--text-muted); font-weight: 400; }
+.ws-benefit li a { color: var(--action-deep); border-bottom: 1px solid currentColor; }
+
+/* ---------- 研修・行事 ---------- */
+.ws-growth { align-items: start; }
+.ws-growth .dv-split-fig img { aspect-ratio: 2/1; }
+.ws-growth-lists { display: grid; gap: var(--s-24); }
+.ws-growth-lists h3 { font-family: var(--font-min); font-size: 17px; font-weight: 700; color: var(--text); }
+.ws-growth-lists .dv-list { margin-top: var(--s-4); grid-template-columns: 1fr; gap: 0; }
+.ws-growth-lists .dv-list li { padding: var(--s-8) 0; font-size: 14.5px; }
+.ws-trip { margin-top: var(--s-40); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .ws-jobs { grid-template-columns: 1fr; }
+  .ws-day { grid-template-columns: 1fr; }
+  .ws-pay-list { grid-template-columns: 1fr; }
+  .ws-pay-list > div:nth-last-child(2) { border-bottom: 1px solid var(--hairline); }
+  .ws-day-photos { position: static; }
+  .ws-cond { grid-template-columns: 1fr 1fr; }
+  .ws-cond li:last-child { grid-column: 1 / -1; }
+  .ws-benefits { grid-template-columns: 1fr; }
+  .ws-benefit, .ws-benefit:nth-child(n+4) { grid-column: auto; }
+  .ws-trip { grid-template-columns: 1fr 1fr; }
+  .ws-trip figure:last-child { display: none; }
+}
+@media (max-width: 560px) {
+  .ws-timeline::before { left: 76px; }
+  .ws-timeline li { grid-template-columns: 62px 1fr; gap: 40px; }
+  .ws-timeline li::before { left: 71px; }
+  .ws-timeline time { font-size: 18px; }
+  .ws-pay-list { padding: var(--s-4) var(--s-16); }
+  .ws-pay-list > div { grid-template-columns: 84px 1fr; gap: var(--s-12); }
+  .ws-pay-list dd { font-size: 14px; }
+}
+
+/* 補足つきの項目はピルではなく角丸の札にして、補足を2行目に */
+.ws-benefit li:has(small) { border-radius: 10px; }
+.ws-benefit li small { display: block; margin: 2px 0 0; }
+@media (min-width: 901px) {
+  .ws-growth .dv-split-fig { position: sticky; top: calc(var(--header-h) + var(--s-24)); }
+}
+.ws-timeline { list-style: none; }
