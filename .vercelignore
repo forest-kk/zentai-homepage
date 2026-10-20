@@ -4,3 +4,5 @@ serve.py
 tools/
 data/
 .DS_Store
+CLAUDE.md
+.claude/

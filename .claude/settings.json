@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(vercel:*)",
+      "Bash(npx vercel:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(gh api:*)",
+      "Bash(rm:*)",
+      "Bash(git rm:*)",
+      "Bash(git clean:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Edit(./css/**)",
+      "Edit(./js/**)",
+      "Edit(./tools/**)",
+      "Edit(./.claude/**)",
+      "Edit(./CLAUDE.md)",
+      "Edit(./vercel.json)",
+      "Edit(./.vercelignore)",
+      "Edit(./.gitignore)",
+      "Edit(./serve.py)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-main.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
