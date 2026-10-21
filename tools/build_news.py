@@ -154,21 +154,9 @@ list_body = f"""
       <p class="nw-empty" id="nwEmpty" hidden>該当するお知らせはありません。</p>
     </div>
   </section>
-
-<script>
-(() => {{
-  const tabs = document.querySelectorAll(".nw-tab");
-  const cards = document.querySelectorAll(".nw-card");
-  tabs.forEach((t) => t.addEventListener("click", () => {{
-    const f = t.dataset.filter;
-    tabs.forEach((x) => {{ const on = x === t; x.classList.toggle("is-active", on); x.setAttribute("aria-pressed", on); }});
-    let n = 0;
-    cards.forEach((c) => {{ const show = f === "all" || c.dataset.cat === f; c.hidden = !show; if (show) {{ n++; c.classList.add("is-in"); }} }});
-    document.getElementById("nwEmpty").hidden = n > 0;
-  }}));
-}})();
-</script>
 """
+# 絞り込みの動きは js/main.js に置いてある（ページに script を直接書かないため。
+# Content-Security-Policy でインラインの script を厳しく制限している）
 (ROOT / "news.html").write_text(
     page("お知らせ", "株式会社フォレストのお知らせ一覧。新倉庫の竣工、地域活動、スポーツ支援などの最新情報をお届けします。",
          "media/hero-poster.jpg", list_body), encoding="utf-8")
