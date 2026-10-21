@@ -426,3 +426,31 @@
   $$("a", mobileMenu).forEach((a) => a.addEventListener("click", closeMenu));
 })();
 
+/* ---------- お知らせ一覧：カテゴリで絞り込み（news.html だけで動く） ---------- */
+(() => {
+  const empty = document.getElementById("nwEmpty");
+  if (!empty) return;
+  const tabs = document.querySelectorAll(".nw-tab");
+  const cards = document.querySelectorAll(".nw-card");
+  tabs.forEach((t) =>
+    t.addEventListener("click", () => {
+      const f = t.dataset.filter;
+      tabs.forEach((x) => {
+        const on = x === t;
+        x.classList.toggle("is-active", on);
+        x.setAttribute("aria-pressed", on);
+      });
+      let n = 0;
+      cards.forEach((c) => {
+        const show = f === "all" || c.dataset.cat === f;
+        c.hidden = !show;
+        if (show) {
+          n++;
+          c.classList.add("is-in");
+        }
+      });
+      empty.hidden = n > 0;
+    })
+  );
+})();
+
