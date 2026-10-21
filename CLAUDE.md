@@ -5,7 +5,7 @@
 
 ## 必ず守ること
 - 作業の前に `git switch main` と `git pull` で main を最新にし、作業用のブランチを作る（例：`git switch -c news/2026-10-25-cleanup`）
-- main に直接コミット・push しない（main のままコミットしようとすると止まる設定にしてある）
+- main に直接コミット・push しない。この端末の Claude Code では止まる設定にしてあるが、普通のターミナル・別のパソコン・GitHub の Web 画面では止まらないので、仕組みに頼らず必ずブランチとプルリクエストで作業する
 - 終わったらプルリクエストを作る。タイトルと説明は日本語で書く。マージ・公開（`vercel` コマンド）はしない
 - ファイルを削除しない（古い写真も消さずに残す）
 - 次のファイルは変更しない：`css/`、`js/`、`tools/`、`vercel.json`、`.vercelignore`、`.gitignore`、`serve.py`、`CLAUDE.md`、`.claude/`
