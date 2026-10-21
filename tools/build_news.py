@@ -12,6 +12,42 @@ ROOT = Path(__file__).resolve().parent.parent
 news = json.loads((ROOT / "data/news.json").read_text(encoding="utf-8"))
 news.sort(key=lambda o: o["date"], reverse=True)
 
+# ---------- 入力の検査 ----------
+# 記事データはHTMLに埋め込まれるので、生成する前に形を確かめる。
+# おかしい値があればここで止めて、どの記事の何が悪いかを日本語で知らせる。
+ALLOWED_CAT = {"お知らせ", "トピックス"}
+MEDIA_RE = re.compile(r"media/[\w./-]+")
+URL_RE = re.compile(r"https://[\w./:%-]+")
+DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def _stop(msg):
+    raise SystemExit(f"data/news.json を直してください — {msg}")
+
+
+_ids = [o.get("id") for o in news]
+_dup = sorted({i for i in _ids if _ids.count(i) > 1}, key=str)
+if _dup:
+    _max = max((i for i in _ids if isinstance(i, int)), default=0)
+    _stop(f"id が重複しています: {_dup}。id は記事ごとに別の数にしてください（いまの最大は {_max} なので次は {_max + 1}）")
+
+for _o in news:
+    _t = _o.get("title", "(タイトル未設定)")
+    if not isinstance(_o.get("id"), int):
+        _stop(f"「{_t}」の id は数字にしてください（いまは {_o.get('id')!r}）")
+    if not DATE_RE.fullmatch(str(_o.get("date", ""))):
+        _stop(f"「{_t}」の date は 2026-10-25 の形にしてください（いまは {_o.get('date')!r}）")
+    if _o.get("cat") not in ALLOWED_CAT:
+        _stop(f"「{_t}」の cat は お知らせ か トピックス にしてください（いまは {_o.get('cat')!r}）")
+    for _im in _o.get("images", []):
+        if not MEDIA_RE.fullmatch(str(_im.get("src", ""))):
+            _stop(f"「{_t}」の画像は media/ の中のファイルを指してください（いまは {_im.get('src')!r}）")
+        if not (isinstance(_im.get("w"), int) and isinstance(_im.get("h"), int) and _im["h"] > 0):
+            _stop(f"「{_t}」の画像の w と h は正の数にしてください（いまは {_im.get('w')!r}, {_im.get('h')!r}）")
+    for _v in _o.get("videos", []):
+        if not (MEDIA_RE.fullmatch(str(_v)) or URL_RE.fullmatch(str(_v))):
+            _stop(f"「{_t}」の動画は media/ の中か https:// のURLにしてください（いまは {_v!r}）")
+
 tpl = (ROOT / "company.html").read_text(encoding="utf-8")
 def grab(pattern):
     return re.search(pattern, tpl, re.S).group(0)
@@ -45,7 +81,7 @@ def page(title, desc, og_image, body):
 <meta name="description" content="{e(desc)}">
 <meta property="og:title" content="{e(title)} | 株式会社フォレスト">
 <meta property="og:description" content="{e(desc)}">
-<meta property="og:image" content="{og_image}">
+<meta property="og:image" content="{e(og_image)}">
 {HEAD_LINKS}
 <link rel="stylesheet" href="css/news.css">
 </head>
@@ -75,8 +111,8 @@ def thumb(o, cls="nw-thumb"):
     if o["images"]:
         im = o["images"][0]
         wide = im["w"] / im["h"] > 2
-        return (f'<figure class="{cls}{" is-banner" if wide else ""}"><img src="{im["src"]}" width="{im["w"]}" '
-                f'height="{im["h"]}" loading="lazy" decoding="async" alt=""></figure>')
+        return (f'<figure class="{cls}{" is-banner" if wide else ""}"><img src="{e(im["src"])}" width="{int(im["w"])}" '
+                f'height="{int(im["h"])}" loading="lazy" decoding="async" alt=""></figure>')
     return (f'<figure class="{cls} is-blank" aria-hidden="true"><img src="media/logo.png" width="1220" height="295" '
             f'loading="lazy" decoding="async" alt=""></figure>')
 
@@ -88,11 +124,11 @@ tabs += [f'<button type="button" class="nw-tab" data-filter="{c}" aria-pressed="
 cards = []
 for i, o in enumerate(news):
     d = f' data-delay="{min(i, 5) * 0.05:.2f}"' if i else ""
-    cards.append(f"""        <li class="nw-card" data-cat="{o['cat']}" data-reveal{d}>
-          <a href="news-{o['id']}.html">
+    cards.append(f"""        <li class="nw-card" data-cat="{e(o['cat'])}" data-reveal{d}>
+          <a href="news-{int(o['id'])}.html">
             {thumb(o)}
             <div class="nw-card-body">
-              <p class="nw-meta"><time datetime="{o['date']}">{fmt(o['date'])}</time><span class="nw-cat">{o['cat']}</span></p>
+              <p class="nw-meta"><time datetime="{e(o['date'])}">{e(fmt(o['date']))}</time><span class="nw-cat">{e(o['cat'])}</span></p>
               <h2>{e(o['title'])}</h2>
               <p class="nw-excerpt">{e(o['excerpt'])}</p>
             </div>
@@ -154,24 +190,24 @@ for i, o in enumerate(news):
             alt = im.get("alt") or (o["title"] + " の写真 " + str(n))
             figs.append(
                 '          <figure%s><img src="%s" width="%s" height="%s" loading="lazy" decoding="async" alt="%s"></figure>'
-                % (cls, im["src"], im["w"], im["h"], e(alt))
+                % (cls, e(im["src"]), int(im["w"]), int(im["h"]), e(alt))
             )
         gallery = '\n        <div class="nw-gallery nw-gallery--%d">\n%s\n        </div>' % (
             min(len(o["images"]), 4), "\n".join(figs))
     videos = ""
     if o.get("videos"):
         videos = "\n        <div class=\"nw-videos\">\n" + "\n".join(
-            f'          <video controls preload="metadata" playsinline src="{v}"></video>' for v in o["videos"]) + "\n        </div>"
+            f'          <video controls preload="metadata" playsinline src="{e(v)}"></video>' for v in o["videos"]) + "\n        </div>"
     def pager(x, label, cls):
         if not x:
             return f'<span class="nw-pager-item {cls} is-empty"></span>'
-        return (f'<a class="nw-pager-item {cls}" href="news-{x["id"]}.html"><span>{label}</span>'
+        return (f'<a class="nw-pager-item {cls}" href="news-{int(x["id"])}.html"><span>{label}</span>'
                 f'<strong>{e(x["title"])}</strong></a>')
     body = f"""
   <section class="nw-article-head">
     <div class="container nw-narrow">
       <p class="wd-breadcrumb" data-reveal><a href="index.html">HOME</a><span>/</span><a href="news.html">お知らせ</a><span>/</span><em>記事</em></p>
-      <p class="nw-meta" data-reveal data-delay="0.05"><time datetime="{o['date']}">{fmt(o['date'])}</time><span class="nw-cat">{o['cat']}</span></p>
+      <p class="nw-meta" data-reveal data-delay="0.05"><time datetime="{e(o['date'])}">{e(fmt(o['date']))}</time><span class="nw-cat">{e(o['cat'])}</span></p>
       <h1 class="nw-title" data-reveal data-delay="0.1">{e(o['title'])}</h1>
     </div>
   </section>
@@ -198,7 +234,7 @@ index = (ROOT / "index.html").read_text(encoding="utf-8")
 latest = []
 for i, o in enumerate(news[:5]):
     d = f' data-delay="{i * 0.06:.2f}"' if i else ""
-    latest.append(f"""        <li data-reveal{d}><a href="news-{o['id']}.html">{thumb(o, 'n-thumb')}<time datetime="{o['date']}">{fmt(o['date'])}</time><span class="n-cat">{o['cat']}</span><p>{e(o['title'])}</p><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>""")
+    latest.append(f"""        <li data-reveal{d}><a href="news-{int(o['id'])}.html">{thumb(o, 'n-thumb')}<time datetime="{e(o['date'])}">{e(fmt(o['date']))}</time><span class="n-cat">{e(o['cat'])}</span><p>{e(o['title'])}</p><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>""")
 index, n1 = re.subn(r'<ul class="news-list">.*?</ul>', '<ul class="news-list">\n' + "\n".join(latest) + "\n      </ul>", index, count=1, flags=re.S)
 index = re.sub(r'(<a class="link-more magnetic" href=")#news(">一覧を見る)', r'\1news.html\2', index)
 (ROOT / "index.html").write_text(index, encoding="utf-8")
