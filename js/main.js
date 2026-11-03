@@ -12,14 +12,14 @@
 
   /* ---------- Split text ---------- */
   $$("[data-split]").forEach((el) => {
-    const base = parseFloat(el.dataset.delay || 0);
+    const base = parseFloat(el.dataset.delay || 0) * 0.4;
     const text = el.textContent;
     el.textContent = "";
     [...text].forEach((ch, i) => {
       const s = document.createElement("span");
       s.className = "ch";
       s.textContent = ch === " " ? " " : ch;
-      s.style.transitionDelay = `${(base + i * 0.05).toFixed(2)}s`;
+      s.style.transitionDelay = `${(base + i * 0.02).toFixed(2)}s`;
       el.appendChild(s);
     });
   });
@@ -32,12 +32,12 @@
           if (!e.isIntersecting) return;
           const el = e.target;
           const d = parseFloat(el.dataset.delay || 0);
-          if (el.hasAttribute("data-reveal") && d) el.style.transitionDelay = `${d}s`;
+          if (el.hasAttribute("data-reveal") && d) el.style.transitionDelay = `${(d * 0.4).toFixed(2)}s`;
           el.classList.add("is-in");
           io.unobserve(el);
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -2% 0px" }
     );
     $$("[data-reveal], [data-split]").forEach((el) => io.observe(el));
 
@@ -56,7 +56,7 @@
 
   function animateCount(el) {
     const target = parseInt(el.dataset.count, 10);
-    const dur = 1600;
+    const dur = 800;
     const t0 = performance.now();
     const ease = (t) => 1 - Math.pow(1 - t, 4);
     (function tick(now) {
@@ -78,22 +78,30 @@
     loader.classList.add("done");
     document.body.classList.remove("is-loading");
     startObservers();
-    setTimeout(() => loader.remove(), 1400);
+    setTimeout(() => loader.remove(), 700);
   }
 
-  if (prefersReduced) {
+  let seen = false;
+  try { seen = sessionStorage.getItem("fk-seen") === "1"; sessionStorage.setItem("fk-seen", "1"); } catch (_) {}
+
+  if (seen) {
+    loader.remove();
+    document.body.classList.remove("is-loading");
+    loaderDone = true;
+    startObservers();
+  } else if (prefersReduced) {
     loadNum.textContent = "100";
     finishLoader();
   } else {
-    const dur = 1700;
+    const dur = 600;
     const t0 = performance.now();
     (function tick(now) {
       const p = clamp((now - t0) / dur, 0, 1);
       loadNum.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 100);
       if (p < 1) requestAnimationFrame(tick);
-      else setTimeout(finishLoader, 250);
+      else setTimeout(finishLoader, 80);
     })(t0);
-    setTimeout(finishLoader, 4000); // フェイルセーフ
+    setTimeout(finishLoader, 2000); // フェイルセーフ
   }
 
   /* ---------- Custom cursor ---------- */
