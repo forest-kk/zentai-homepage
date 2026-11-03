@@ -124,6 +124,14 @@ main ol { list-style: none; }
 .dv-spec dt { font-size: 14px; font-weight: 600; color: var(--text-muted); }
 .dv-spec dd { font-size: 15px; color: var(--text); }
 .dv-spec dd a { color: var(--action-deep); border-bottom: 1px solid currentColor; }
+/* 表が続けて並ぶとき（ビルが複数など）は1件ずつカードに分ける */
+.dv-spec:has(+ .dv-spec), .dv-spec + .dv-spec {
+  border: 1px solid var(--hairline); border-radius: var(--r-card);
+  background: var(--canvas); padding: 0 var(--s-16);
+}
+.dv-spec + .dv-spec { margin-top: var(--s-20); }
+.dv-spec:has(+ .dv-spec) > div:last-child, .dv-spec + .dv-spec > div:last-child { border-bottom: 0; }
+.dv-spec:has(+ .dv-spec) > div:first-child dd, .dv-spec + .dv-spec > div:first-child dd { font-size: 17px; font-weight: 700; }
 
 /* ---------- ほかの事業 ---------- */
 .dv-related { background: var(--surface); }
