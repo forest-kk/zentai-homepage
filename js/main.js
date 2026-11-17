@@ -15,6 +15,18 @@
     const base = parseFloat(el.dataset.delay || 0) * 0.4;
     const text = el.textContent;
     el.textContent = "";
+    // 英語は単語の途中で改行されないよう、単語ごとに動かす
+    if (document.documentElement.lang === "en") {
+      text.trim().split(/\s+/).forEach((w, i) => {
+        if (i) el.appendChild(document.createTextNode(" "));
+        const s = document.createElement("span");
+        s.className = "ch";
+        s.textContent = w;
+        s.style.transitionDelay = `${(base + i * 0.06).toFixed(2)}s`;
+        el.appendChild(s);
+      });
+      return;
+    }
     [...text].forEach((ch, i) => {
       const s = document.createElement("span");
       s.className = "ch";
