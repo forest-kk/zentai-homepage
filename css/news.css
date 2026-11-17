@@ -85,6 +85,20 @@
 .nw-gallery figure.is-contain { background: #fff; }
 .nw-gallery figure.is-contain img { object-fit: contain; }
 .nw-videos { margin-top: var(--s-32); display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-12); }
+/* Instagram の埋め込み（リール＝縦型に合わせた枠） */
+.nw-embeds { margin-top: var(--s-32); display: flex; flex-wrap: wrap; gap: var(--s-24); }
+.nw-ig { margin: 0; width: min(400px, 100%); }
+.nw-ig iframe {
+  width: 100%; height: 640px; border: 1px solid var(--hairline); border-radius: var(--r-card);
+  background: var(--surface); display: block;
+}
+.nw-ig figcaption { margin-top: var(--s-8); font-size: 13px; }
+.nw-ig figcaption a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 600; color: var(--action-deep); border-bottom: 1px solid currentColor;
+}
+@media (max-width: 560px) { .nw-ig iframe { height: 625px; } }
+
 .nw-videos video { width: 100%; border-radius: var(--r-card); background: #000; }
 
 .nw-pager {

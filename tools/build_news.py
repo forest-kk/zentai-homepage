@@ -185,7 +185,23 @@ for i, o in enumerate(news):
     videos = ""
     if o.get("videos"):
         videos = "\n        <div class=\"nw-videos\">\n" + "\n".join(
-            f'          <video controls preload="metadata" playsinline src="{e(v)}"></video>' for v in o["videos"]) + "\n        </div>"
+            '          <video controls preload="metadata" playsinline src="%s"></video>' % e(v)
+            for v in o["videos"]) + "\n        </div>"
+    # Instagram のリール・投稿を埋め込む（自社アカウントの動画をサイト内で見せる用）
+    embeds = ""
+    if o.get("instagram"):
+        cards = []
+        for url in o["instagram"]:
+            u = url.split("?")[0].rstrip("/")
+            cards.append(
+                '          <figure class="nw-ig">\n'
+                '            <iframe src="%s/embed/" title="Instagramの投稿" loading="lazy"\n'
+                '                    scrolling="no" allowtransparency="true" allowfullscreen></iframe>\n'
+                '            <figcaption><a href="%s" target="_blank" rel="noopener">Instagramで見る</a></figcaption>\n'
+                '          </figure>' % (e(u), e(u))
+            )
+        embeds = '\n        <div class="nw-embeds">\n' + "\n".join(cards) + "\n        </div>"
+    videos = videos + embeds
     def pager(x, label, cls):
         if not x:
             return f'<span class="nw-pager-item {cls} is-empty"></span>'
