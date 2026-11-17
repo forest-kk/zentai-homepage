@@ -1,0 +1,23 @@
+# 英語版（en/）の直し忘れを、プルリクエストの段階で止める
+name: 英語版のチェック
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  en-sync:
+    name: en-sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 日本語ページと英語版がそろっているか
+        run: python3 tools/check_en.py
+      - name: 英語版の共通部分（ヘッダー・フッター等）がそろっているか
+        run: |
+          python3 tools/build_en.py
+          if ! git diff --quiet; then
+            echo "python3 tools/build_en.py を実行してからコミットしてください。差分のあるファイル:"
+            git diff --name-only
+            exit 1
+          fi
