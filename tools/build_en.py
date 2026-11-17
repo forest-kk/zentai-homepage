@@ -192,21 +192,26 @@ def build_ja(page):
     path.write_text(s, encoding="utf-8")
 
 
-ja_footer = re.search(BLOCKS["footer"], (ROOT / "company.html").read_text(encoding="utf-8"), re.S).group(0)
-missing = [p for p in EN_PAGES if not (EN / p).exists()]
-if missing:
-    raise SystemExit(f"en/ に訳したページがありません: {missing}")
-for p in EN_PAGES:
-    build_en(p, ja_footer)
-for p in EN_PAGES + ["recruit.html", "workstyle.html"]:
-    build_ja(p)
+def main():
+    ja_footer = re.search(BLOCKS["footer"], (ROOT / "company.html").read_text(encoding="utf-8"), re.S).group(0)
+    missing = [p for p in EN_PAGES if not (EN / p).exists()]
+    if missing:
+        raise SystemExit(f"en/ に訳したページがありません: {missing}")
+    for p in EN_PAGES:
+        build_en(p, ja_footer)
+    for p in EN_PAGES + ["recruit.html", "workstyle.html"]:
+        build_ja(p)
 
-# 取り残しの確認：英語版の本文に日本語が残っていないか
-JP = re.compile(r"[぀-ヿ一-鿿]")
-for p in EN_PAGES:
-    s = (EN / p).read_text(encoding="utf-8")
-    s = re.sub(r'<a [^>]*lang="ja".*?</a>|query=[^"&]*', "", s, flags=re.S)
-    left = sorted(set(JP.findall(s)))
-    if left:
-        print(f"注意: en/{p} に日本語が残っています: {''.join(left)[:40]}")
-print(f"英語版 {len(EN_PAGES)} ページ・日本語版 {len(EN_PAGES) + 2} ページを更新")
+    # 取り残しの確認：英語版の本文に日本語が残っていないか
+    JP = re.compile(r"[぀-ヿ一-鿿]")
+    for p in EN_PAGES:
+        s = (EN / p).read_text(encoding="utf-8")
+        s = re.sub(r'<a [^>]*lang="ja".*?</a>|query=[^"&]*', "", s, flags=re.S)
+        left = sorted(set(JP.findall(s)))
+        if left:
+            print(f"注意: en/{p} に日本語が残っています: {''.join(left)[:40]}")
+    print(f"英語版 {len(EN_PAGES)} ページ・日本語版 {len(EN_PAGES) + 2} ページを更新")
+
+
+if __name__ == "__main__":
+    main()
