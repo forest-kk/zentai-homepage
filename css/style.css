@@ -470,7 +470,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
    About
    ============================================================ */
 .about { background: var(--canvas); }
-.about-grid { display: grid; grid-template-columns: 1fr auto; gap: clamp(var(--s-32), 6vw, var(--s-72)); align-items: start; }
+.about-grid { display: grid; grid-template-columns: 1fr minmax(300px, 390px); gap: clamp(var(--s-32), 6vw, var(--s-72)); align-items: start; }
 .statement {
   font-family: var(--font-min); font-weight: 700;
   font-size: clamp(28px, 3.8vw, 46px); line-height: 1.55; letter-spacing: -.02em;
@@ -496,8 +496,19 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 }
 .mission-list span { display: block; font-size: 14px; color: var(--text-muted); margin-top: var(--s-4); }
 
-.about-side { padding-top: var(--s-12); }
+.about-side { padding-top: var(--s-12); display: flex; align-items: flex-start; gap: var(--s-20); }
+/* 縦書きの一文の隣に、水源の写真を縦長で置く */
+.about-photo { flex: 1; min-width: 0; margin: 0; }
+.about-photo img {
+  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block;
+  border-radius: var(--r-card); background: var(--surface);
+}
+.about-photo figcaption {
+  margin-top: var(--s-8);
+  font-size: 12px; letter-spacing: .12em; color: var(--text-muted);
+}
 .tategaki {
+  flex: none;
   writing-mode: vertical-rl; font-family: var(--font-min); font-weight: 600;
   font-size: clamp(15px, 1.3vw, 18px); letter-spacing: .42em; line-height: 2.2;
   color: var(--text-muted);
