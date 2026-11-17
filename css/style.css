@@ -210,6 +210,16 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 }
 .header-cta:hover { background: var(--action-deep); }
 
+/* 言語の切替え（日本語版は EN、英語版は 日本語） */
+.lang-switch {
+  font-size: 13px; font-weight: 600; letter-spacing: .06em; white-space: nowrap;
+  padding: var(--s-8) var(--s-12); border-radius: var(--r-pill);
+  border: 1px solid var(--hairline); color: var(--text);
+  transition: background .3s, border-color .3s;
+}
+.lang-switch:hover { background: var(--surface); border-color: var(--text-muted); }
+.site-header .lang-switch + .header-cta { margin-left: calc(var(--s-16) - var(--s-32)); }
+
 .menu-btn {
   display: none; position: relative; z-index: 300;
   width: 44px; height: 44px; border: 1px solid var(--hairline); border-radius: 50%;
@@ -887,6 +897,7 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 1100px) {
   .gnav { display: none; }
   .header-cta { margin-left: auto; }
+  .lang-switch { margin-left: auto; }
   .menu-btn { display: block; }
 }
 
@@ -1040,3 +1051,12 @@ a:focus-visible, button:focus-visible {
   .contact-hq { grid-template-columns: 1fr; gap: var(--s-16); }
 }
 
+
+/* ============================================================
+   英語版（en/）向けの調整
+   ============================================================ */
+/* 縦書きの英字は横倒しで流れるので、字間を詰めて読みやすく */
+html[lang="en"] .hero-side { letter-spacing: .18em; }
+html[lang="en"] .tategaki { letter-spacing: .12em; }
+/* 英単語が枠からはみ出さないように */
+html[lang="en"] main { overflow-wrap: break-word; }
