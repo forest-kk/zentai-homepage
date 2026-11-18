@@ -344,9 +344,12 @@
 
       // <source media> を無視するブラウザ向けに、実際に読む src をここで確定させる
       (() => {
-        const want = innerWidth <= 820 ? "media/hero-mobile.mp4" : "media/hero.mp4";
+        // HTML の <source> に書いたパスを使う（英語版の ../ や、差し替え時の ?v= を保つため）
+        const sources = [...heroVideo.querySelectorAll("source")];
+        const pick = innerWidth <= 820 ? sources.find((s) => s.media) : sources.find((s) => !s.media);
+        const want = pick && pick.src;
         const current = heroVideo.currentSrc || "";
-        if (current && !current.endsWith(want)) {
+        if (want && current && current !== want) {
           heroVideo.src = want;
           heroVideo.load();
         }
